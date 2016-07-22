@@ -11,28 +11,27 @@ source:
     sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
 
 build:
-    number: 4
+    number: 5
     skip: True  # [win]
 
 requirements:
     build:
         - netcdf-fortran 4.4.*
         - perl
+#        - openmpi  # [osx]
+        - mpich  # [linux]
         - gcc
     run:
         - netcdf-fortran 4.4.*
         - libgcc
+#        - openmpi  # [osx]
+        - mpich  # [linux]
 
 test:
     commands:
         - ESMF_Info
         - ESMF_RegridWeightGen --help
         - conda inspect linkages -n _test esmf  # [linux]
-        # FIXME: remove the lines below.
-        - otool -L `which ESMF_Info`  # [osx]
-        - otool -L `which ESMF_RegridWeightGen`  # [osx]
-        - otool -L `which ESMF_Regrid`  # [osx]
-        - otool -L `which ESMF_Scrip2Unstruct`  # [osx]
 
 about:
     home: http://www.earthsystemmodeling.org/
