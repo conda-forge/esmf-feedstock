@@ -18,26 +18,22 @@ requirements:
     build:
         - netcdf-fortran 4.4.*
         - perl
-        - gcc
+        - gcc  # [not win]
     run:
         - netcdf-fortran 4.4.*
-        - libgcc
+        - libgcc  # [not win]
 
 test:
     commands:
         - ESMF_Info
         - ESMF_RegridWeightGen --help
-        - conda inspect linkages -n _test esmf  # [linux]
-        # FIXME: remove the lines below.
-        - otool -L `which ESMF_Info`  # [osx]
-        - otool -L `which ESMF_RegridWeightGen`  # [osx]
-        - otool -L `which ESMF_Regrid`  # [osx]
-        - otool -L `which ESMF_Scrip2Unstruct`  # [osx]
+        - conda inspect linkages -n _test esmf  # [not win]
+        - conda inspect objects -n _test esmf  # [osx]
 
 about:
     home: http://www.earthsystemmodeling.org/
     license: The University of Illinois/NCSA Open Source License (NCSA)
-    summary: The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.
+    summary: 'The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.'
 
 extra:
     recipe-maintainers:
