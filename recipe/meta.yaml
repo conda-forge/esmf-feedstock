@@ -2,45 +2,41 @@
 {% set ver = version.replace(".", "_") %}
 
 package:
-    name: esmf
-    version: {{ version }}
+  name: esmf
+  version: {{ version }}
 
 source:
-    fn: esmf-{{ version }}.tar.gz
-    url: http://downloads.sourceforge.net/project/esmf/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
-    sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
+  fn: esmf-{{ version }}.tar.gz
+  url: http://downloads.sourceforge.net/project/esmf/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
+  sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
 
 build:
-    number: 4
-    skip: True  # [win]
+  number: 5
+  skip: True  # [win]
 
 requirements:
-    build:
-        - netcdf-fortran 4.4.*
-        - perl
-        - gcc
-    run:
-        - netcdf-fortran 4.4.*
-        - libgcc
+  build:
+    - netcdf-fortran 4.4.*
+    - perl
+    - gcc  # [not win]
+  run:
+    - netcdf-fortran 4.4.*
+    - libgcc  # [not win]
 
 test:
-    commands:
-        - ESMF_Info
-        - ESMF_RegridWeightGen --help
-        - conda inspect linkages -n _test esmf  # [linux]
-        # FIXME: remove the lines below.
-        - otool -L `which ESMF_Info`  # [osx]
-        - otool -L `which ESMF_RegridWeightGen`  # [osx]
-        - otool -L `which ESMF_Regrid`  # [osx]
-        - otool -L `which ESMF_Scrip2Unstruct`  # [osx]
+  commands:
+    - ESMF_Info
+    - ESMF_RegridWeightGen --help
+    - conda inspect linkages -p $PREFIX esmf  # [not win]
+    - conda inspect objects -p $PREFIX esmf  # [osx]
 
 about:
-    home: http://www.earthsystemmodeling.org/
-    license: The University of Illinois/NCSA Open Source License (NCSA)
-    summary: The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.
+  home: http://www.earthsystemmodeling.org/
+  license: The University of Illinois/NCSA Open Source License (NCSA)
+  summary: 'The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.'
 
 extra:
-    recipe-maintainers:
-        - ocefpaf
-        - bekozi
-        - rokuingh
+  recipe-maintainers:
+    - ocefpaf
+    - bekozi
+    - rokuingh
