@@ -17,7 +17,7 @@ export ESMF_CXXLINKLIBS=-lmpifort
 export ESMF_COMM=mpich2
 
 make
-make check
+#make check
 make install
 
 if [[ $(uname) == Darwin ]]; then
