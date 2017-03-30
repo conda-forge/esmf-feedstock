@@ -19,9 +19,11 @@ requirements:
     - netcdf-fortran 4.4.*
     - perl
     - gcc  # [not win]
+    - mpich
   run:
     - netcdf-fortran 4.4.*
     - libgcc  # [not win]
+    - mpich
 
 test:
   commands:
