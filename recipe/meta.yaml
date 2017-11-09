@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - netcdf-fortran 4.4.*
-    - perl
+    - perl 5.22.2.1
     - gcc  # [not win]
     - mpich
   run:
