@@ -6,12 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  fn: esmf-{{ version }}.tar.gz
   url: http://downloads.sourceforge.net/project/esmf/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
   sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
 
 build:
-  number: 6
+  number: 7
   skip: True  # [win]
 
 requirements:
@@ -29,8 +28,8 @@ test:
   commands:
     - ESMF_Info
     - ESMF_RegridWeightGen --help
-    - conda inspect linkages -p $PREFIX esmf  # [not win]
-    - conda inspect objects -p $PREFIX esmf  # [osx]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.earthsystemmodeling.org/
