@@ -10,17 +10,19 @@ source:
   sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
 
 build:
-  number: 7
+  number: 8
   skip: True  # [win]
 
 requirements:
   build:
     - netcdf-fortran 4.4.*
+    - hdf5 1.8.18|1.8.18.*
     - perl 5.22.2.1
     - gcc  # [not win]
     - mpich
   run:
     - netcdf-fortran 4.4.*
+    - hdf5 1.8.18|1.8.18.*
     - libgcc  # [not win]
     - mpich
 
