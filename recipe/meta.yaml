@@ -1,5 +1,4 @@
-#{% set version = "7.0.0" %}
-{% set version = "7.1.0.dev54" %}
+{% set version = "7.1.0r" %}
 {% set ver = version.replace(".", "_") %}
 
 package:
@@ -7,10 +6,8 @@ package:
   version: {{ version }}
 
 source:
-#  url: http://downloads.sourceforge.net/project/esmf/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
-#  sha256: b2ac25f78c4bded006360230bd229953909f2a9f9e71b732833c240edc7707b1
-  url: https://sourceforge.net/code-snapshots/git/e/es/esmf/esmf.git/esmf-esmf-137e4eac0f5a9f5191120cc77a7b34f66f0c3ddf.zip
-  sha256: 91e97d506210c1fe927b41d5664a3174ccb75d0652297b69605d4012aafcf085
+  url: https://sourceforge.net/code-snapshots/git/e/es/esmf/esmf.git/esmf-esmf-e3ac95b2e25a36d6cbfa68ed93eb1645fea29fcd.zip
+  sha256: 8d3b77b552705901542c2bc6c24bddfdd8daa8c01a8b790885b93392e3c627c6
 
 build:
   number: 0
