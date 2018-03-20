@@ -3,7 +3,7 @@ About esmf
 
 Home: http://www.earthsystemmodeling.org/
 
-Package license: The University of Illinois/NCSA Open Source License (NCSA)
+Package license: University of Illinois/NCSA (NCSA)
 
 Feedstock license: BSD 3-Clause
 
