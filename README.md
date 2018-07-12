@@ -14,14 +14,15 @@ Summary: The Earth System Modeling Framework (ESMF) is software for building and
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/esmf-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/esmf-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/esmf-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/esmf-feedstock)
-Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/esmf-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/esmf-feedstock)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/esmf/badges/version.svg)](https://anaconda.org/conda-forge/esmf)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/esmf/badges/downloads.svg)](https://anaconda.org/conda-forge/esmf)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-esmf-green.svg)](https://anaconda.org/conda-forge/esmf) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/esmf.svg)](https://anaconda.org/conda-forge/esmf) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/esmf.svg)](https://anaconda.org/conda-forge/esmf) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/esmf.svg)](https://anaconda.org/conda-forge/esmf) |
 
 Installing esmf
 ===============
