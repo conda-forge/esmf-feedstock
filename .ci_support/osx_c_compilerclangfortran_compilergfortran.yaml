@@ -1,15 +1,17 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+build_number_decrement:
+- '0'
 c_compiler:
-- toolchain_c
+- clang
 channel_sources:
-- conda-forge,defaults
+- conda-forge/label/gcc7,defaults
 channel_targets:
-- conda-forge main
+- conda-forge gcc7
 fortran_compiler:
-- toolchain_fort
+- gfortran
 hdf5:
-- 1.10.3
+- 1.10.4
 libnetcdf:
 - '4.6'
 macos_machine:
@@ -19,9 +21,13 @@ macos_min_version:
 netcdf_fortran:
 - '4.4'
 pin_run_as_build:
-  hdf5:
-    max_pin: x.x.x
   libnetcdf:
     max_pin: x.x
   netcdf-fortran:
     max_pin: x.x
+zip_keys:
+- - c_compiler
+  - fortran_compiler
+  - channel_sources
+  - channel_targets
+  - build_number_decrement
