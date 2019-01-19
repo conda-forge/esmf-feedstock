@@ -21,8 +21,8 @@ if [[ $(uname) == Linux ]]; then
   ln -s "${FC}" "${BUILD_PREFIX}/bin/gfortran"
 fi
 
-make
-#make check
+make -j${CPU_COUNT}
+# make check -j${CPU_COUNT}
 make install
 
 if [[ $(uname) == Darwin ]]; then
