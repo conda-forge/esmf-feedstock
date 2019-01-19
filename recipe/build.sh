@@ -15,6 +15,12 @@ export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
 export ESMF_COMM=mpich3
 
+#their build tool is dumb
+if [[ $(uname) == Linux ]]; then
+  ln -s "${CC}" "${BUILD_PREFIX}/bin/gcc"
+  ln -s "${FC}" "${BUILD_PREFIX}/bin/gfortran"
+fi
+
 make
 #make check
 make install
