@@ -15,6 +15,10 @@ export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
 export ESMF_COMM=mpich3
 
+if [[ $(uname) == Darwin ]]; then
+  export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+fi
+
 #their build tool is dumb
 if [[ $(uname) == Linux ]]; then
   ln -s "${CC}" "${BUILD_PREFIX}/bin/gcc"
