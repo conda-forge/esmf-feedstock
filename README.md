@@ -18,7 +18,8 @@ Summary: The Earth System Modeling Framework (ESMF) is software for building and
 Current build status
 ====================
 
-[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/esmf-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/esmf-feedstock)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/esmf-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/esmf-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/esmf-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/esmf-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
