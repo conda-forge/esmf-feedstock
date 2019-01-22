@@ -10,14 +10,15 @@ source:
   git_tag: ESMF_7_1_0r
 
 build:
-  number: 3
+  number: 1003
   skip: True  # [win]
 
 requirements:
   build:
-    - perl 5.22.2.1
+    - perl
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
     - netcdf-fortran
     - libnetcdf

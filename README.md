@@ -1,3 +1,7 @@
+<!--
+# -*- mode: jinja -*-
+-->
+
 About esmf
 ==========
 
@@ -14,7 +18,8 @@ Summary: The Earth System Modeling Framework (ESMF) is software for building and
 Current build status
 ====================
 
-[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/esmf-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/esmf-feedstock)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/esmf-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/esmf-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/esmf-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/esmf-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
@@ -48,6 +53,8 @@ conda search esmf --channel conda-forge
 
 About conda-forge
 =================
+
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 
 conda-forge is a community-led conda channel of installable packages.
 In order to provide high-quality builds, the process has been automated into the
@@ -103,3 +110,11 @@ In order to produce a uniquely identifiable distribution:
  * If the version of a package **is** being increased, please remember to return
    the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
    back to 0.
+
+Feedstock Maintainers
+=====================
+
+* [@bekozi](https://github.com/bekozi/)
+* [@ocefpaf](https://github.com/ocefpaf/)
+* [@rokuingh](https://github.com/rokuingh/)
+

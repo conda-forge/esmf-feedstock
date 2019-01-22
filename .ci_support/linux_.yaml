@@ -1,23 +1,27 @@
 c_compiler:
-- toolchain_c
+- gcc
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+cxx_compiler:
+- gxx
 docker_image:
-- condaforge/linux-anvil
+- condaforge/linux-anvil-comp7
 fortran_compiler:
-- toolchain_fort
+- gfortran
 hdf5:
-- 1.10.3
+- 1.10.4
 libnetcdf:
 - '4.6'
 netcdf_fortran:
 - '4.4'
+perl:
+- '5.26'
 pin_run_as_build:
-  hdf5:
-    max_pin: x.x.x
   libnetcdf:
     max_pin: x.x
   netcdf-fortran:
     max_pin: x.x
+  perl:
+    max_pin: x.x.x
