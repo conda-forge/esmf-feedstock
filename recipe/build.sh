@@ -17,6 +17,8 @@ export ESMF_COMM=mpich3
 
 if [[ $(uname) == Darwin ]]; then
   export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+  export ESMF_F90LINKOPTS="$LDFLAGS -pthread"
+  export ESMF_CXXLINKOPTS="$LDFLAGS -pthread"
 fi
 
 #their build tool is dumb
