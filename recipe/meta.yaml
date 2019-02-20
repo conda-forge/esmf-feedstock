@@ -1,4 +1,4 @@
-{% set version = "7.1.0r" %}
+{% set version = "7.1.0" %}
 {% set ver = version.replace(".", "_") %}
 
 package:
@@ -10,7 +10,7 @@ source:
   git_tag: ESMF_7_1_0r
 
 build:
-  number: 1003
+  number: 1004
   skip: True  # [win]
 
 requirements:
@@ -34,8 +34,6 @@ test:
   commands:
     - ESMF_Info
     - ESMF_RegridWeightGen --help
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.earthsystemmodeling.org/
