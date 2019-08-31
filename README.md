@@ -7,7 +7,9 @@ Package license: University of Illinois/NCSA (NCSA)
 
 Feedstock license: BSD 3-Clause
 
-Summary: The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.
+Summary: The Earth System Modeling Framework (ESMF) is software for building and
+coupling weather, climate, and related models.'
+
 
 
 
