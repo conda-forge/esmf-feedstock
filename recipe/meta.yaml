@@ -10,7 +10,7 @@ source:
   git_tag: ESMF_7_1_0r
 
 build:
-  number: 1006
+  number: 1007
   skip: True  # [win]
 
 requirements:
@@ -38,7 +38,9 @@ test:
 about:
   home: http://www.earthsystemmodeling.org/
   license: University of Illinois/NCSA (NCSA)
-  summary: 'The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.'
+  summary: |
+    The Earth System Modeling Framework (ESMF) is software for building and
+    coupling weather, climate, and related models.'
 
 extra:
   recipe-maintainers:

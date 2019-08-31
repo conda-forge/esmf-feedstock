@@ -27,7 +27,7 @@ macos_min_version:
 netcdf_fortran:
 - '4.4'
 perl:
-- '5.26'
+- 5.26.2
 pin_run_as_build:
   libnetcdf:
     max_pin: x.x.x
