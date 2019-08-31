@@ -21,9 +21,13 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - netcdf-fortran
+    - libnetcdf
+    - hdf5
     - mpich
   run:
     - netcdf-fortran
+    - libnetcdf
+    - hdf5
     - mpich
 
 test:
