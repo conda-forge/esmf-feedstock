@@ -20,6 +20,8 @@ hdf5:
 - 1.10.5
 libnetcdf:
 - 4.6.2
+mpich:
+- '3.3'
 netcdf_fortran:
 - '4.4'
 perl:
