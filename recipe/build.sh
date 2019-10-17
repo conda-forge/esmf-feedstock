@@ -15,8 +15,20 @@ export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
 export ESMF_COMM=mpich3
 
-make
-#make check
+if [[ $(uname) == Darwin ]]; then
+  export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+  export ESMF_F90LINKOPTS="$LDFLAGS -pthread"
+  export ESMF_CXXLINKOPTS="$LDFLAGS -pthread"
+fi
+
+#their build tool is dumb
+if [[ $(uname) == Linux ]]; then
+  ln -s "${CC}" "${BUILD_PREFIX}/bin/gcc"
+  ln -s "${FC}" "${BUILD_PREFIX}/bin/gfortran"
+fi
+
+make -j${CPU_COUNT}
+# make check -j${CPU_COUNT}
 make install
 
 if [[ $(uname) == Darwin ]]; then

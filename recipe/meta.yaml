@@ -1,4 +1,4 @@
-{% set version = "7.1.0r" %}
+{% set version = "7.1.0" %}
 {% set ver = version.replace(".", "_") %}
 
 package:
@@ -6,37 +6,41 @@ package:
   version: {{ version }}
 
 source:
-  url: https://sourceforge.net/code-snapshots/git/e/es/esmf/esmf.git/esmf-esmf-e3ac95b2e25a36d6cbfa68ed93eb1645fea29fcd.zip
-  sha256: 8d3b77b552705901542c2bc6c24bddfdd8daa8c01a8b790885b93392e3c627c6
+  git_url: git://git.code.sf.net/p/esmf/esmf
+  git_tag: ESMF_7_1_0r
 
 build:
-  number: 0
+  number: 1008
   skip: True  # [win]
 
 requirements:
   build:
-    - netcdf-fortran 4.4.*
-    - hdf5 1.10.1
-    - perl 5.22.2.1
-    - gcc  # [not win]
+    - perl
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - netcdf-fortran
+    - libnetcdf
+    - hdf5
     - mpich
   run:
-    - netcdf-fortran 4.4.*
-    - hdf5 1.10.1
-    - libgcc  # [not win]
+    - netcdf-fortran
+    - libnetcdf
+    - hdf5
     - mpich
 
 test:
   commands:
     - ESMF_Info
     - ESMF_RegridWeightGen --help
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.earthsystemmodeling.org/
   license: University of Illinois/NCSA (NCSA)
-  summary: 'The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.'
+  summary: |
+    The Earth System Modeling Framework (ESMF) is software for building and
+    coupling weather, climate, and related models.'
 
 extra:
   recipe-maintainers:
