@@ -1,17 +1,39 @@
 {% set version = "8.0.0" %}
 {% set ver = version.replace(".", "_") %}
+{% set build = 2 %}
+
+# ensure mpi is defined (needed for conda-smithy recipe-lint)
+{% set mpi = mpi or 'nompi' %}
+
+{% if mpi == 'mpich' %}
+# prioritize mpich variant, which was previously the only option, via build number
+{% set build = build + 100 %}
+{% endif %}
 
 package:
   name: esmf
   version: {{ version }}
 
 source:
-  git_url: git://git.code.sf.net/p/esmf/esmf
-  git_tag: ESMF_8_0_0
+  url: http://www.earthsystemmodeling.org/esmf_releases/public/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
+  sha256: 75c34c41806e703551b6b79566edf34c23f1eebcf821749e5320e860e565d94f
 
 build:
-  number: 1
+  number: {{ build }}
   skip: True  # [win]
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `esmf * mpi_mpich_*` for mpich
+  # `esmf * mpi_*` for any mpi
+  # `esmf * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 
 requirements:
   build:
@@ -20,15 +42,21 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
+    # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - netcdf-fortran
-    - libnetcdf
+    - netcdf-fortran * {{ mpi_prefix }}_*
     - hdf5
-    - mpich
+    - hdf5 * {{ mpi_prefix }}_*
+    - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
+    - {{ mpi }}  # [mpi != 'nompi']
   run:
-    - netcdf-fortran
-    - libnetcdf
-    - hdf5
-    - mpich
+    - netcdf-fortran * {{ mpi_prefix }}_*
+    - libnetcdf * {{ mpi_prefix }}_*
+    - hdf5 * {{ mpi_prefix }}_*
+    - {{ mpi }}  # [mpi != 'nompi']
+    - openssh  # [mpi == 'openmpi']
 
 test:
   commands:
@@ -47,3 +75,4 @@ extra:
     - ocefpaf
     - bekozi
     - rokuingh
+    - xylar
