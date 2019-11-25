@@ -31,6 +31,7 @@ if [[ $mpi == 'mpich' ]]; then
   export ESMF_COMM=mpich3
 elif [[ $mpi == 'openmpi' ]]; then
   export ESMF_COMM=openmpi
+  export ESMF_MPIRUN="mpirun --oversubscribe"
 elif [[ $mpi == 'nompi' ]]; then
   export ESMF_COMM=mpiuni
 fi
