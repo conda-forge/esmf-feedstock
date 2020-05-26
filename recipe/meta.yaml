@@ -15,8 +15,8 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.earthsystemmodeling.org/esmf_releases/public/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
-  sha256: 75c34c41806e703551b6b79566edf34c23f1eebcf821749e5320e860e565d94f
+  url: https://github.com/esmf-org/esmf/archive/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
+  sha256: 9172fb73f3fe95c8188d889ee72fdadb4f978b1d969e1d8e401e8d106def1d84
 
 build:
   number: {{ build }}
