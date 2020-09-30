@@ -16,7 +16,7 @@ package:
 
 source:
   url: https://github.com/esmf-org/esmf/archive/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
-  sha256: 92e0a54ab65ee5a21d9294196f914255465b7655
+  sha256: 0F7A049905107499064FF8953578B6D81CF8CD3EA398F95B14309DC8951A5C40
 
 build:
   number: {{ build }}
