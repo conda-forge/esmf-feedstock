@@ -1,4 +1,4 @@
-{% set version = "8.0.1" %}
+{% set version = "8.1.0b31" %}
 {% set ver = version.replace(".", "_") %}
 {% set build = 0 %}
 
@@ -16,7 +16,7 @@ package:
 
 source:
   url: https://github.com/esmf-org/esmf/archive/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
-  sha256: 9172fb73f3fe95c8188d889ee72fdadb4f978b1d969e1d8e401e8d106def1d84
+  sha256: 92e0a54ab65ee5a21d9294196f914255465b7655
 
 build:
   number: {{ build }}
