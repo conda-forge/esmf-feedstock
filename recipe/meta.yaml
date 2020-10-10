@@ -1,47 +1,78 @@
-{% set version = "7.1.0r" %}
+{% set version = "8.1.0.beta.snapshot.33" %}
 {% set ver = version.replace(".", "_") %}
+{% set build = 0 %}
+
+# ensure mpi is defined (needed for conda-smithy recipe-lint)
+{% set mpi = mpi or 'nompi' %}
+
+{% if mpi == 'mpich' %}
+# prioritize mpich variant, which was previously the only option, via build number
+{% set build = build + 100 %}
+{% endif %}
 
 package:
   name: esmf
   version: {{ version }}
 
 source:
-  git_url: git://git.code.sf.net/p/esmf/esmf
-  git_tag: ESMF_7_1_0r
+  url: https://github.com/esmf-org/esmf/archive/ESMF_{{ ver }}/esmf_{{ ver }}_src.tar.gz
+  sha256: 1c7ff2963d5a47821e14921b380bc12b232e71b0844e0dcced4ea1d6614e68f0
 
 build:
-  number: 1
-  skip: True  # [win]
+  number: {{ build }}
+  skip: true  # [win]
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `esmf * mpi_mpich_*` for mpich
+  # `esmf * mpi_*` for any mpi
+  # `esmf * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
 
 requirements:
   build:
-    - netcdf-fortran 4.4.*
-    - libnetcdf 4.5*
-    - hdf5 1.10.1
-    - perl 5.22.2.1
-    - gcc  # [not win]
-    - mpich
+    - perl
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
+    # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
+    - netcdf-fortran
+    - netcdf-fortran * {{ mpi_prefix }}_*
+    - hdf5
+    - hdf5 * {{ mpi_prefix }}_*
+    - libnetcdf
+    - libnetcdf * {{ mpi_prefix }}_*
+    - {{ mpi }}  # [mpi != 'nompi']
   run:
-    - netcdf-fortran 4.4.*
-    - libnetcdf >=4.5
-    - hdf5 1.10.1
-    - libgcc  # [not win]
-    - mpich
+    - netcdf-fortran * {{ mpi_prefix }}_*
+    - libnetcdf * {{ mpi_prefix }}_*
+    - hdf5 * {{ mpi_prefix }}_*
+    - {{ mpi }}  # [mpi != 'nompi']
+    - openssh  # [mpi == 'openmpi']
 
 test:
   commands:
     - ESMF_Info
     - ESMF_RegridWeightGen --help
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.earthsystemmodeling.org/
   license: University of Illinois/NCSA (NCSA)
-  summary: 'The Earth System Modeling Framework (ESMF) is software for building and coupling weather, climate, and related models.'
+  summary: |
+    The Earth System Modeling Framework (ESMF) is software for building and
+    coupling weather, climate, and related models.'
 
 extra:
   recipe-maintainers:
     - ocefpaf
     - bekozi
     - rokuingh
+    - xylar

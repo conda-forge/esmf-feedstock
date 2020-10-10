@@ -13,10 +13,37 @@ export ESMF_NETCDF="split"
 export ESMF_NETCDF_INCLUDE=${PREFIX}/include
 export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
-export ESMF_COMM=mpich3
+if [[ $(uname) == Darwin ]]; then
+  export ESMF_CPP="clang-cpp -P -x c"
+else
+  export ESMF_CPP="${CPP} -E -P -x c"
+fi
 
-make
-#make check
+if [[ -z "$mpi" || "$mpi" == "nompi" ]]; then
+  export ESMF_F90=${FC}
+  export ESMF_CXX=${CXX}
+else
+  export ESMF_F90=mpif90
+  export ESMF_CXX=mpicxx
+fi
+
+if [[ $mpi == 'mpich' ]]; then
+  export ESMF_COMM=mpich3
+elif [[ $mpi == 'openmpi' ]]; then
+  export ESMF_COMM=openmpi
+  export ESMF_MPIRUN="mpirun --oversubscribe"
+elif [[ $mpi == 'nompi' ]]; then
+  export ESMF_COMM=mpiuni
+fi
+
+if [[ $(uname) == Darwin ]]; then
+  export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+  export ESMF_F90LINKOPTS="$LDFLAGS -pthread"
+  export ESMF_CXXLINKOPTS="$LDFLAGS -pthread"
+fi
+
+make -j${CPU_COUNT}
+make check
 make install
 
 if [[ $(uname) == Darwin ]]; then
