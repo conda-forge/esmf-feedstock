@@ -1,7 +1,7 @@
 About esmf
 ==========
 
-Home: http://www.earthsystemmodeling.org/
+Home: http://earthsystemmodeling.org/
 
 Package license: University of Illinois/NCSA (NCSA)
 
