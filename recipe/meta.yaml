@@ -1,4 +1,4 @@
-{% set version = "8.0.1" %}
+{% set version = "8.1.0" %}
 {% set ver = version.replace(".", "_") %}
 {% set build = 2 %}
 
@@ -64,7 +64,7 @@ test:
     - ESMF_RegridWeightGen --help
 
 about:
-  home: http://www.earthsystemmodeling.org/
+  home: http://earthsystemmodeling.org/
   license: University of Illinois/NCSA (NCSA)
   license_file: LICENSE
   summary: |
