@@ -50,7 +50,8 @@ if [[ $(uname) == Darwin ]]; then
   ESMF_ORIGINAL_LIB_PATH=$(find $(pwd) -type f -name "libesmf.dylib")
   ESMF_LIB_PATH=${PREFIX}/lib/libesmf.dylib
 
-  APPS=( ESMF_Info ESMF_RegridWeightGen ESMF_Regrid ESMF_Scrip2Unstruct )
+  APPS=( ESMF_PrintInfo ESMF_PrintInfoC ESMF_RegridWeightGen ESMF_Regrid \
+	 ESMF_Scrip2Unstruct ESMF_WebServController )
   for APP in "${APPS[@]}"; do
     ESMF_APP_PATH=$PREFIX/bin/$APP
     install_name_tool -change $ESMF_ORIGINAL_LIB_PATH $ESMF_LIB_PATH ${ESMF_APP_PATH}

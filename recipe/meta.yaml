@@ -60,7 +60,7 @@ requirements:
 
 test:
   commands:
-    - ESMF_Info
+    - ESMF_PrintInfo
     - ESMF_RegridWeightGen --help
 
 about:
