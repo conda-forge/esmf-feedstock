@@ -1,6 +1,6 @@
 {% set version = "8.1.0" %}
 {% set ver = version.replace(".", "_") %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
