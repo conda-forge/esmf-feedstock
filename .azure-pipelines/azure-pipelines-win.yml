@@ -8,14 +8,8 @@ jobs:
     vmImage: vs2017-win2016
   strategy:
     matrix:
-      win_64_mpimpich:
-        CONFIG: win_64_mpimpich
-        UPLOAD_PACKAGES: 'True'
       win_64_mpinompi:
         CONFIG: win_64_mpinompi
-        UPLOAD_PACKAGES: 'True'
-      win_64_mpiopenmpi:
-        CONFIG: win_64_mpiopenmpi
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:
