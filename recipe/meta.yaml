@@ -65,7 +65,7 @@ test:
 
 about:
   home: http://earthsystemmodeling.org/
-  license: University of Illinois/NCSA (NCSA)
+  license: NCSA
   license_file: LICENSE
   summary: |
     The Earth System Modeling Framework (ESMF) is software for building and
