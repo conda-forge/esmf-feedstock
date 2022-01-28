@@ -19,9 +19,15 @@ if [[ "$mpi" != "nompi" ]]; then
   export ESMF_PIO_LIBPATH=${PREFIX}/lib
 fi
 
+# TODO: update once osx-64 gets gfortran>=10
 if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
+  # allow argument mismatch in Fortran
+  # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
+  # see https://trac.macports.org/ticket/60954
   export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch"
 fi
+
+echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
 
 if [[ $(uname) == Darwin ]]; then
   export ESMF_COMPILER=gfortranclang
@@ -43,12 +49,14 @@ if [[ $mpi == 'mpich' ]]; then
 elif [[ $mpi == 'openmpi' ]]; then
   export ESMF_COMM=openmpi
   export ESMF_MPIRUN="mpirun --oversubscribe"
+  # for cross compiling using openmpi
+  export OPAL_PREFIX=$PREFIX
 elif [[ $mpi == 'nompi' ]]; then
   export ESMF_COMM=mpiuni
 fi
 
 if [[ $(uname) == Darwin ]]; then
-  export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+  export LDFLAGS="-headerpad_max_install_names -Wl,-no_compact_unwind $LDFLAGS"
   export ESMF_F90LINKOPTS="$LDFLAGS -pthread -lc++"
   export ESMF_CXXLINKOPTS="$LDFLAGS -pthread"
 fi
