@@ -40,7 +40,8 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - make
+    - gnuconfig  # [unix]
+    - make  # [unix]
   host:
     # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
