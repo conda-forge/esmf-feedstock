@@ -23,6 +23,14 @@ if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
   export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch"
 fi
 
+# # TODO: update once osx-64 gets gfortran>=10
+# if [[ "$target_platform" != osx-64 || ${ARCH} == 'arm64' ]]; then
+#     # allow argument mismatch in Fortran
+#     # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
+#     # see https://trac.macports.org/ticket/60954
+#     export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch -fallow-invalid-boz"
+# fi
+
 if [[ $(uname) == Darwin ]]; then
   export ESMF_COMPILER=gfortranclang
   export ESMF_CPP="clang-cpp -P -x c"
