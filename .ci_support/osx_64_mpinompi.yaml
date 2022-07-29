@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '11'
+- '13'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -11,13 +11,13 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '13'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '9'
 hdf5:
-- 1.12.1
+- 1.12.2
 libnetcdf:
 - 4.8.1
 macos_machine:
@@ -25,14 +25,14 @@ macos_machine:
 mpi:
 - nompi
 mpich:
-- '3'
+- '4'
 netcdf_fortran:
 - '4.5'
+openmpi:
+- '4'
 perl:
 - 5.32.1
 pin_run_as_build:
-  mpich:
-    max_pin: x.x
   netcdf-fortran:
     max_pin: x.x
 target_platform:
