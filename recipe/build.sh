@@ -13,6 +13,13 @@ export ESMF_NETCDF="split"
 export ESMF_NETCDF_INCLUDE=${PREFIX}/include
 export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
+# TODO: update once osx-64 gets gfortran>=10
+if [[ "$target_platform" != osx-64 ]]; then
+    # allow argument mismatch in Fortran
+    # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
+    export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch -fallow-invalid-boz"
+fi
+
 if [[ $(uname) == Darwin ]]; then
   export ESMF_CPP="clang-cpp -P -x c"
 else
