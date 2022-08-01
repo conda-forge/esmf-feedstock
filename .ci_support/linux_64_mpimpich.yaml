@@ -27,7 +27,7 @@ mpi:
 mpich:
 - '4'
 netcdf_fortran:
-- '4.5'
+- '4.6'
 openmpi:
 - '4'
 perl:
