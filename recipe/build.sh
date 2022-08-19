@@ -28,7 +28,7 @@ echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
 # GFORTRAN_MAJOR=$(${GFORTRAN} -dumpversion | cut -f1 -d.)
 # echo GFORTRAN_MAJOR=${GFORTRAN_MAJOR}
 # if (( "${GFORTRAN_MAJOR}" >= 10 )); then
-#     export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch -fallow-invalid-boz"
+#     export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch"
 
 # # TODO: update once osx-64 gets gfortran>=10
 # if [[ "$target_platform" != osx-64 || ${ARCH} == 'arm64' ]]; then
