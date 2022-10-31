@@ -13,11 +13,14 @@ export ESMF_NETCDF="split"
 export ESMF_NETCDF_INCLUDE=${PREFIX}/include
 export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
-# TODO: update once osx-64 gets gfortran>=10
-if [[ "$target_platform" != osx-64 ]]; then
-    # allow argument mismatch in Fortran
-    # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
-    export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch -fallow-invalid-boz"
+if [[ "$mpi" != "nompi" ]]; then
+  export ESMF_PIO="external"
+  export ESMF_PIO_INCLUDE=${PREFIX}/include
+  export ESMF_PIO_LIBPATH=${PREFIX}/lib
+fi
+
+if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
+  export ESMF_F90COMPILEOPTS="-fallow-argument-mismatch"
 fi
 
 if [[ $(uname) == Darwin ]]; then
