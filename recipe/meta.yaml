@@ -51,6 +51,7 @@ requirements:
     - libnetcdf
     - libnetcdf * {{ mpi_prefix }}_*
     - {{ mpi }}  # [mpi != 'nompi']
+    - parallelio  # [mpi != 'nompi']
   run:
     - netcdf-fortran * {{ mpi_prefix }}_*
     - libnetcdf * {{ mpi_prefix }}_*
