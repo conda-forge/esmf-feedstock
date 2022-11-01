@@ -24,6 +24,7 @@ if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
 fi
 
 if [[ $(uname) == Darwin ]]; then
+  export ESMF_COMPILER=gfortranclang
   export ESMF_CPP="clang-cpp -P -x c"
 else
   export ESMF_CPP="${CPP} -E -P -x c"
