@@ -32,11 +32,13 @@ else
 fi
 
 if [[ -z "$mpi" || "$mpi" == "nompi" ]]; then
-  export ESMF_F90=${FC}
-  export ESMF_CXX=${CXX}
+  export ESMF_F90COMPILER=${FC}
+  export ESMF_CCOMPILER=${CC}
+  export ESMF_CXXCOMPILER=${CXX}
 else
-  export ESMF_F90=mpif90
-  export ESMF_CXX=mpicxx
+  export ESMF_F90COMPILER=mpif90
+  export ESMF_CCOMPILER=mpicc
+  export ESMF_CXXCOMPILER=mpicxx
 fi
 
 if [[ $mpi == 'mpich' ]]; then
