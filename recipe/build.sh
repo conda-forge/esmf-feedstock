@@ -13,7 +13,9 @@ export ESMF_NETCDF="split"
 export ESMF_NETCDF_INCLUDE=${PREFIX}/include
 export ESMF_NETCDF_LIBPATH=${PREFIX}/lib
 
-if [[ "$mpi" != "nompi" ]]; then
+if [[ -z "$mpi" || "$mpi" == "nompi" ]]; then
+  export ESMF_PIO="internal"
+else
   export ESMF_PIO="external"
   export ESMF_PIO_INCLUDE=${PREFIX}/include
   export ESMF_PIO_LIBPATH=${PREFIX}/lib
