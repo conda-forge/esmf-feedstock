@@ -42,7 +42,7 @@ requirements:
     - {{ compiler('cxx') }}
     - gnuconfig  # [unix]
     - make  # [unix]
-    - {{ mpi }}  # [build_platform != target_platform and mpi != 'nompi']
+    - {{ mpi }}  # [build_platform != target_platform and mpi == 'openmpi']
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform]
     - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform]
     - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform]
