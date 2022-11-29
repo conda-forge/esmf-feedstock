@@ -58,6 +58,8 @@ if [[ $mpi == 'mpich' ]]; then
 elif [[ $mpi == 'openmpi' ]]; then
   export ESMF_COMM=openmpi
   export ESMF_MPIRUN="mpirun --oversubscribe"
+  # for cross compiling using openmpi
+  export OPAL_PREFIX=$PREFIX
 elif [[ $mpi == 'nompi' ]]; then
   export ESMF_COMM=mpiuni
 fi
