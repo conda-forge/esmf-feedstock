@@ -43,9 +43,9 @@ requirements:
     - gnuconfig  # [unix]
     - make  # [unix]
     - {{ mpi }}  # [build_platform != target_platform and mpi == 'openmpi']
-    # - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
-    # - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
-    # - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
   host:
     # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
