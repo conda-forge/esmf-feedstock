@@ -65,7 +65,7 @@ elif [[ $mpi == 'nompi' ]]; then
 fi
 
 if [[ $(uname) == Darwin ]]; then
-  export LDFLAGS="-headerpad_max_install_names $LDFLAGS"
+  export LDFLAGS="-headerpad_max_install_names -Wl,-no_compact_unwind $LDFLAGS"
   export ESMF_F90LINKOPTS="$LDFLAGS -pthread -lc++"
   export ESMF_CXXLINKOPTS="$LDFLAGS -pthread"
 fi
