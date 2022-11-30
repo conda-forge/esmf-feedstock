@@ -1,5 +1,5 @@
 {% set version = "8.4.0" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -40,7 +40,12 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - make
+    - gnuconfig  # [unix]
+    - make  # [unix]
+    - {{ mpi }}  # [build_platform != target_platform and mpi == 'openmpi']
+    - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
   host:
     # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
