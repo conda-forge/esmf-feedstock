@@ -1,3 +1,17 @@
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/build/common.mk esmf-8.4.0/build/common.mk
+--- esmf-8.4.0.orig/build/common.mk	2022-10-25 00:04:55.000000000 +0200
++++ esmf-8.4.0/build/common.mk	2022-12-01 15:37:37.757323403 +0100
+@@ -2415,8 +2415,8 @@
+ # vars used below in the all_tests target, because these are in the pattern
+ # (build, run), (build, run), ... not (build, build, ...) then (run, run, ...)
+ 
+-TEST_TARGETS = build_unit_tests run_unit_tests \
+-               build_system_tests run_system_tests
++TEST_TARGETS = build_unit_tests run_unit_tests  # \
++               # build_system_tests run_system_tests
+ 
+ ALLTEST_TARGETS = $(TEST_TARGETS) \
+                   build_examples run_examples
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile
 --- esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile	2022-10-25 00:04:55.000000000 +0200
 +++ esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile	2022-12-01 13:46:56.167361973 +0100
