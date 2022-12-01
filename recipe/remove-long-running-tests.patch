@@ -1,0 +1,27 @@
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile
+--- esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile	2022-10-25 00:04:55.000000000 +0200
++++ esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile	2022-12-01 10:43:54.847785191 +0100
+@@ -12,7 +12,6 @@
+                 $(ESMF_TESTDIR)/ESMC_MBMesh_ExtrapolateUTest \
+                 $(ESMF_TESTDIR)/ESMC_MBMesh_UtilUTest \
+                 $(ESMF_TESTDIR)/ESMC_MeshCapUTest \
+-                $(ESMF_TESTDIR)/ESMC_MeshCapRegridUTest \
+                 $(ESMF_TESTDIR)/ESMC_MeshMOABUTest \
+                 $(ESMF_TESTDIR)/ESMCI_IntegrateUTest \
+                 $(ESMF_TESTDIR)/ESMC_MeshUTest \
+@@ -31,7 +30,6 @@
+                 RUN_ESMC_MBMesh_ExtrapolateUTest \
+                 RUN_ESMC_MBMesh_UtilUTest \
+                 RUN_ESMC_MeshCapUTest \
+-                RUN_ESMC_MeshCapRegridUTest \
+                 RUN_ESMC_MeshMOABUTest \
+                 RUN_ESMCI_IntegrateUTest \
+                 RUN_ESMC_MeshUTest \
+@@ -45,7 +43,6 @@
+ TESTS_RUN_UNI = \
+                 RUN_ESMC_MBMesh_UtilUTestUNI \
+                 RUN_ESMC_MeshCapUTestUNI \
+-                RUN_ESMC_MeshCapRegridUTestUNI \
+                 RUN_ESMC_MeshMOABUTestUNI \
+                 RUN_ESMCI_IntegrateUTestUNI \
+                 RUN_ESMC_MeshUTestUNI \
