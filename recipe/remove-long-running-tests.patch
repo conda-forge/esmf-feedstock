@@ -1,27 +1,75 @@
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile
 --- esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile	2022-10-25 00:04:55.000000000 +0200
-+++ esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile	2022-12-01 10:43:54.847785191 +0100
-@@ -12,7 +12,6 @@
++++ esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile	2022-12-01 13:46:56.167361973 +0100
+@@ -11,8 +11,6 @@
+ TESTS_BUILD	  = \
                  $(ESMF_TESTDIR)/ESMC_MBMesh_ExtrapolateUTest \
                  $(ESMF_TESTDIR)/ESMC_MBMesh_UtilUTest \
-                 $(ESMF_TESTDIR)/ESMC_MeshCapUTest \
+-                $(ESMF_TESTDIR)/ESMC_MeshCapUTest \
 -                $(ESMF_TESTDIR)/ESMC_MeshCapRegridUTest \
                  $(ESMF_TESTDIR)/ESMC_MeshMOABUTest \
                  $(ESMF_TESTDIR)/ESMCI_IntegrateUTest \
                  $(ESMF_TESTDIR)/ESMC_MeshUTest \
-@@ -31,7 +30,6 @@
+@@ -30,8 +28,6 @@
+ TESTS_RUN    =  \
                  RUN_ESMC_MBMesh_ExtrapolateUTest \
                  RUN_ESMC_MBMesh_UtilUTest \
-                 RUN_ESMC_MeshCapUTest \
+-                RUN_ESMC_MeshCapUTest \
 -                RUN_ESMC_MeshCapRegridUTest \
                  RUN_ESMC_MeshMOABUTest \
                  RUN_ESMCI_IntegrateUTest \
                  RUN_ESMC_MeshUTest \
-@@ -45,7 +43,6 @@
+@@ -44,8 +40,6 @@
+ 
  TESTS_RUN_UNI = \
                  RUN_ESMC_MBMesh_UtilUTestUNI \
-                 RUN_ESMC_MeshCapUTestUNI \
+-                RUN_ESMC_MeshCapUTestUNI \
 -                RUN_ESMC_MeshCapRegridUTestUNI \
                  RUN_ESMC_MeshMOABUTestUNI \
                  RUN_ESMCI_IntegrateUTestUNI \
                  RUN_ESMC_MeshUTestUNI \
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Superstructure/PreESMFMod/tests/makefile esmf-8.4.0/src/Superstructure/PreESMFMod/tests/makefile
+--- esmf-8.4.0.orig/src/Superstructure/PreESMFMod/tests/makefile	2022-10-25 00:04:55.000000000 +0200
++++ esmf-8.4.0/src/Superstructure/PreESMFMod/tests/makefile	2022-12-01 13:48:07.895743347 +0100
+@@ -8,15 +8,12 @@
+ 
+ .NOTPARALLEL:
+ TESTS_BUILD   = \
+-		$(ESMF_TESTDIR)/ESMF_RegridWeightGenUTest \
+ 		$(ESMF_TESTDIR)/ESMF_FileRegridUTest
+ 
+ TESTS_RUN     = \
+-		RUN_ESMF_RegridWeightGenUTest \
+ 		RUN_ESMF_FileRegridUTest
+ 
+ TESTS_RUN_UNI = \
+-		RUN_ESMF_RegridWeightGenUTestUNI \
+ 		RUN_ESMF_FileRegridUTestUNI
+ 
+ include ${ESMF_DIR}/makefile
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/system_tests/makefile esmf-8.4.0/src/system_tests/makefile
+--- esmf-8.4.0.orig/src/system_tests/makefile	2022-10-25 00:04:55.000000000 +0200
++++ esmf-8.4.0/src/system_tests/makefile	2022-12-01 13:44:32.032595613 +0100
+@@ -13,13 +13,10 @@
+             ESMF_ArrayScatterGather \
+             ESMF_Attribute \
+             ESMF_ComplianceChecker \
+-            ESMF_ArraySparseMatMul \
+             ESMF_ArrayRedist \
+             ESMF_ArrayRedistMPMD \
+             ESMF_ArrayRedistSharedObj \
+             ESMF_ArrayRedist3D \
+-            ESMF_ArrayBundleSparseMatMul \
+-            ESMF_ArrayBundleRedist \
+             ESMF_ArrayRedistOpenMP \
+             ESMF_ArrayRedistOpenACC \
+             ESMF_ArraySharedDeSSI \
+@@ -50,8 +47,6 @@
+             ESMF_FieldLSRedistArb2ArbUngrdDim \
+             ESMF_FieldLSSMM \
+             ESMF_FieldMeshSMM \
+-            ESMF_TransferGrid \
+-            ESMF_TransferMesh \
+             ESMF_SequentialEnsemble \
+             ESMF_ConcurrentEnsemble \
+             ESMF_DirectCoupling \
