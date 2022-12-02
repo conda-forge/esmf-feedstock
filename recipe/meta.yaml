@@ -17,7 +17,12 @@ source:
   url: https://github.com/esmf-org/esmf/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 28531810bf1ae78646cda6494a53d455d194400f19dccd13d6361871de42ed0f
   patches:
+    # Always remove these very long running tests
     - remove-long-running-tests.patch
+    # Remove system tests due to time limits on ci
+    - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpimpich']
+    # Remove all tests due to time limits on ci
+    - deactivate-all-tests.patch  # [ppc64le and mpi == 'mpimpich']
 
 build:
   number: {{ build }}
