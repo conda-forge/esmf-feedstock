@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 export ESMF_DIR=$(pwd)
 
 export ESMF_INSTALL_PREFIX=${PREFIX}
@@ -62,7 +64,8 @@ if [[ $(uname) == Darwin ]]; then
 fi
 
 make -j${CPU_COUNT}
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+if [[ ( "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ) \
+          && ! ( "${target_platform}" == "linux-ppc64le" && $mpi == "mpich" ) ]]; then
 make check
 fi
 make install

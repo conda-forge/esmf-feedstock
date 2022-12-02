@@ -21,8 +21,6 @@ source:
     - remove-long-running-tests.patch
     # Remove system tests due to time limits on ci
     - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
-    # Remove all tests due to time limits on ci
-    - deactivate-all-tests.patch  # [ppc64le and mpi == 'mpich']
 
 build:
   number: {{ build }}
