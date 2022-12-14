@@ -70,7 +70,7 @@ make check
 fi
 make install
 
-sed -i "s:${BUILD_PREFIX}:${PREFIX}:g" ${PREFIX}/lib/esmf.mk
+sed -i.bu "s:${BUILD_PREFIX}:${PREFIX}:g" ${PREFIX}/lib/esmf.mk && rm ${PREFIX}/lib/esmf.mk.bu
 
 if [[ $(uname) == Darwin ]]; then
   ESMF_ORIGINAL_LIB_PATH=$(find $(pwd) -type f -name "libesmf.dylib")
