@@ -21,7 +21,6 @@ if [[ "$mpi" != "nompi" ]]; then
   export ESMF_PIO_LIBPATH=${PREFIX}/lib
 fi
 
-# TODO: update once osx-64 gets gfortran>=10
 if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
   # allow argument mismatch in Fortran
   # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
@@ -31,13 +30,17 @@ fi
 
 echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1"  && "${target_platform}" == "linux-aarch64" ]]; then
-  # having trouble with -m64 on aarch64 when cross-compling and this is the "fix"
-  # that happens when not cross-compiling
-  export ESMF_ABI=32
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+  if [[ "${target_platform}" == "linux-aarch64" ]]; then
+    export ESMF_OS="linux-aarch64"
+  elif [[ "${target_platform}" == "linux-ppc64le" ]]; then
+    export ESMF_OS="linux-ppc64le"
+  elif [[ "${target_platform}" == "osx-arm64" ]]; then
+    export ESMF_OS="osx-arm64"
+  fi
 fi
 
-echo ESMF_ABI=${ESMF_ABI}
+echo ESMF_OS=${ESMF_OS}
 
 
 if [[ $(uname) == Darwin ]]; then
