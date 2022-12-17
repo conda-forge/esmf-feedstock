@@ -32,15 +32,15 @@ echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
   if [[ "${target_platform}" == "linux-aarch64" ]]; then
-    export ESMF_OS="linux-aarch64"
+    export ESMF_MACHINE="aarch64"
   elif [[ "${target_platform}" == "linux-ppc64le" ]]; then
-    export ESMF_OS="linux-ppc64le"
-  elif [[ "${target_platform}" == "osx-arm64" ]]; then
-    export ESMF_OS="osx-arm64"
+    export ESMF_MACHINE="ppc64le"
+  elif [[ "${target_platform}" == "arm64" ]]; then
+    export ESMF_OS="arm64"
   fi
 fi
 
-echo ESMF_OS=${ESMF_OS}
+echo ESMF_MACHINE=${ESMF_MACHINE}
 
 
 if [[ $(uname) == Darwin ]]; then
