@@ -37,6 +37,8 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1"  && "${target_platform}" == "l
   export ESMF_ABI=32
 fi
 
+echo ESMF_ABI=${ESMF_ABI}
+
 
 if [[ $(uname) == Darwin ]]; then
   export ESMF_COMPILER=gfortranclang
