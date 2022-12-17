@@ -31,6 +31,13 @@ fi
 
 echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
 
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1"  && "${target_platform}" == "linux-aarch64" ]]; then
+  # having trouble with -m64 on aarch64 when cross-compling and this is the "fix"
+  # that happens when not cross-compiling
+  export ESMF_ABI=32
+fi
+
+
 if [[ $(uname) == Darwin ]]; then
   export ESMF_COMPILER=gfortranclang
   export ESMF_CPP="clang-cpp -P -x c"
