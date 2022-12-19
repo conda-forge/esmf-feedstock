@@ -21,7 +21,6 @@ if [[ "$mpi" != "nompi" ]]; then
   export ESMF_PIO_LIBPATH=${PREFIX}/lib
 fi
 
-# TODO: update once osx-64 gets gfortran>=10
 if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
   # allow argument mismatch in Fortran
   # https://github.com/esmf-org/esmf/releases/tag/ESMF_8_2_0
@@ -30,6 +29,19 @@ if [[ "$(echo $fortran_compiler_version | cut -d '.' -f 1)" -gt 9 ]]; then
 fi
 
 echo ESMF_F90COMPILEOPTS=${ESMF_F90COMPILEOPTS}
+
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+  if [[ "${target_platform}" == "linux-aarch64" ]]; then
+    export ESMF_MACHINE="aarch64"
+  elif [[ "${target_platform}" == "linux-ppc64le" ]]; then
+    export ESMF_MACHINE="ppc64le"
+  elif [[ "${target_platform}" == "arm64" ]]; then
+    export ESMF_OS="arm64"
+  fi
+fi
+
+echo ESMF_MACHINE=${ESMF_MACHINE}
+
 
 if [[ $(uname) == Darwin ]]; then
   export ESMF_COMPILER=gfortranclang
@@ -69,6 +81,8 @@ if [[ ( "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATO
 make check
 fi
 make install
+
+sed -i.bu "s:${BUILD_PREFIX}:${PREFIX}:g" ${PREFIX}/lib/esmf.mk && rm ${PREFIX}/lib/esmf.mk.bu
 
 if [[ $(uname) == Darwin ]]; then
   ESMF_ORIGINAL_LIB_PATH=$(find $(pwd) -type f -name "libesmf.dylib")
