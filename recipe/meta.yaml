@@ -24,7 +24,7 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [(win and mpi!='nompi') or (not win)]
+  skip: true  # [not win]
 
   # add build string so packages can depend on
   # mpi or nompi variants explicitly:
@@ -41,29 +41,38 @@ build:
 
 requirements:
   build:
+    # General
     - perl
-    - {{ compiler('fortran') }}
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - gnuconfig  # [unix]
-    - make  # [unix]
-    - {{ mpi }}  # [build_platform != target_platform and mpi == 'openmpi']
+    - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
+    - gnuconfig
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
+    # Unix
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler('cxx') }}  # [unix]
+    - {{ compiler('fortran') }}  # [unix]
+    - make  # [unix]
+    - pkg-config  # [unix]
+    # Win
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - m2-make  # [win]
+    - m2w64-pkg-config  # [win]
+    - m2w64-dlfcn  # [win]
   host:
     # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - netcdf-fortran
     - netcdf-fortran * {{ mpi_prefix }}_*
-    - hdf5
-    - hdf5 * {{ mpi_prefix }}_*
     - libnetcdf
     - libnetcdf * {{ mpi_prefix }}_*
+    - hdf5
+    - hdf5 * {{ mpi_prefix }}_*
     - {{ mpi }}  # [mpi != 'nompi']
     - parallelio  # [mpi != 'nompi']
   run:
-    - netcdf-fortran * {{ mpi_prefix }}_*
     - libnetcdf * {{ mpi_prefix }}_*
     - hdf5 * {{ mpi_prefix }}_*
     - {{ mpi }}  # [mpi != 'nompi']
