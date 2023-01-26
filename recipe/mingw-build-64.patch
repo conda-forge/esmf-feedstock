@@ -1,13 +1,12 @@
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.longrunning2/build_config/MinGW.gfortran.default/build_rules.mk esmf-8.4.0/build_config/MinGW.gfortran.default/build_rules.mk
 --- esmf-8.4.0.longrunning2/build_config/MinGW.gfortran.default/build_rules.mk	2023-01-26 13:34:04.124729997 +0100
-+++ esmf-8.4.0/build_config/MinGW.gfortran.default/build_rules.mk	2023-01-26 13:33:29.425492892 +0100
-@@ -99,6 +99,9 @@
++++ esmf-8.4.0/build_config/MinGW.gfortran.default/build_rules.mk	2023-01-26 15:36:49.547807521 +0100
+@@ -98,6 +98,8 @@
+ ifeq ($(ESMF_ABI),64)
  ESMF_ABISTRING := x86_64_small
  endif
- else
-+ifeq ($(ESMF_MACHINE),x86_64)
++else ifeq ($(ESMF_MACHINE),x86_64)
 +ESMF_ABISTRING := x86_64_small
-+else
+ else
  $(error "ESMF_MACHINE = $(ESMF_MACHINE)" not recognized)
  endif
- 
