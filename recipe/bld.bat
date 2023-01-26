@@ -41,6 +41,9 @@ rem set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 set "ESMF_OS=MinGW"
 
+cat /etc/fstab
+exit 1
+
 mkdir /tmp
 
 mingw32-make info
