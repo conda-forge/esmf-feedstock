@@ -40,7 +40,7 @@ set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 set "ESMF_COMM=mpiuni"
 
-mingw32-make -j${CPU_COUNT}
+mingw32-make -j%CPU_COUNT%
 mingw32-make install
 mingw32-make check
 
