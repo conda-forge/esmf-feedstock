@@ -29,6 +29,7 @@ build:
   script_env:
     - TMPDIR
     - TMP
+    - TEMP
     - TEMPDIR
 
   # add build string so packages can depend on
