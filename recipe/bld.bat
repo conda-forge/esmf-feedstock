@@ -10,7 +10,7 @@ rem set "CFLAGS=-fPIC -I%LIBRARY_PREFIX%/include"
 rem :: PENDING -> PARALLEL MPI STUFF
 rem :: set PARALLEL=""
 
-set "ESMF_DIR=%cd%"
+set "ESMF_DIR=%cd:\=/%"
 
 rem set "ESMF_INSTALL_PREFIX=%LIBRARY_PREFIX%"
 rem set "ESMF_INSTALL_BINDIR=%LIBRARY_PREFIX%/bin"
@@ -40,6 +40,8 @@ rem set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 
 set "ESMF_OS=MinGW"
+
+mkdir /tmp
 
 mingw32-make info
 
