@@ -26,6 +26,10 @@ source:
 build:
   number: {{ build }}
   skip: true  # [not win]
+  script_env:
+    - TMPDIR
+    - TMP
+    - TEMPDIR
 
   # add build string so packages can depend on
   # mpi or nompi variants explicitly:
