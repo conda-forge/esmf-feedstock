@@ -40,8 +40,8 @@ set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 set "ESMF_COMM=mpiuni"
 
-m2-make -j${CPU_COUNT}
-m2-make install
-m2-make check
+mingw32-make -j${CPU_COUNT}
+mingw32-make install
+mingw32-make check
 
-m2-sed -i.bu "s:%BUILD_PREFIX%:%LIBRARY_PREFIX%:g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
+sed -i.bu "s:%BUILD_PREFIX%:%LIBRARY_PREFIX%:g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
