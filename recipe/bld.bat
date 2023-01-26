@@ -38,7 +38,7 @@ set "ESMF_CPP=%MINGWBIN%/cpp.exe -E -P -x c"
 set "ESMF_F90=%MINGWBIN%/gfortran.exe"
 set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
-set "ESMF_COMM=mpiuni"
+rem set "ESMF_COMM=mpiuni"
 
 set "ESMF_OS=MinGW"
 rem set "ESMF_COMPILER=gfortran"
