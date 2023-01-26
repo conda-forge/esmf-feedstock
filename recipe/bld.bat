@@ -40,6 +40,11 @@ set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 set "ESMF_COMM=mpiuni"
 
+set "ESMF_OS=MinGW"
+rem set "ESMF_COMPILER=gfortran"
+
+mingw32-make info
+
 mingw32-make -j%CPU_COUNT%
 mingw32-make install
 mingw32-make check

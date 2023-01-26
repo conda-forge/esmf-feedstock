@@ -58,7 +58,10 @@ requirements:
     - {{ compiler('m2w64_c') }}  # [win]
     - {{ compiler('m2w64_cxx') }}  # [win]
     - {{ compiler('m2w64_fortran') }}  # [win]
+    - m2-autoconf  # [win]
+    - m2-grep  # [win]
     - m2-make  # [win]
+    - m2-sed  # [win]
     - m2w64-pkg-config  # [win]
     - m2w64-dlfcn  # [win]
   host:
