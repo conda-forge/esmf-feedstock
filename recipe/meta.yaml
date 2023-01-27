@@ -26,11 +26,9 @@ source:
 build:
   number: {{ build }}
   skip: true  # [not win]
-  script_env:
-    - TMPDIR
-    - TMP
-    - TEMP
-    - TEMPDIR
+  # script_env:
+  #   - TMP
+  #   - TEMP
 
   # add build string so packages can depend on
   # mpi or nompi variants explicitly:
@@ -50,6 +48,7 @@ requirements:
     # General
     - perl
     - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
+    - cmake
     - gnuconfig
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
@@ -68,6 +67,7 @@ requirements:
     - m2-grep  # [win]
     - m2-make  # [win]
     - m2-sed  # [win]
+    - m2-which  # [win]
     - m2w64-pkg-config  # [win]
     - m2w64-dlfcn  # [win]
   host:
