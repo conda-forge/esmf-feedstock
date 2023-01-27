@@ -14,7 +14,9 @@ set "ESMF_DIR=%cd:\=/%"
 
 bash -lc "ls /etc"
 bash -lc "cat /etc/fstab"
-exit 1
+bash -lc "echo 'none /tmp usertemp binary,posix=0 0 0' >>/etc/fstab"
+bash -lc "cat /etc/fstab"
+bash -lc "mount"
 
 rem set "ESMF_INSTALL_PREFIX=%LIBRARY_PREFIX%"
 rem set "ESMF_INSTALL_BINDIR=%LIBRARY_PREFIX%/bin"
