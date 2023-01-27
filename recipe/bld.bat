@@ -12,6 +12,7 @@ rem :: set PARALLEL=""
 
 set "ESMF_DIR=%cd:\=/%"
 
+bash -lc "ls /etc"
 bash -lc "cat /etc/fstab"
 exit 1
 
