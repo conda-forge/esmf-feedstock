@@ -12,6 +12,9 @@ rem :: set PARALLEL=""
 
 set "ESMF_DIR=%cd:\=/%"
 
+bash -lc "cat /etc/fstab"
+exit 1
+
 rem set "ESMF_INSTALL_PREFIX=%LIBRARY_PREFIX%"
 rem set "ESMF_INSTALL_BINDIR=%LIBRARY_PREFIX%/bin"
 rem set "ESMF_INSTALL_DOCDIR=%LIBRARY_PREFIX%/doc"
