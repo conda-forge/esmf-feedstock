@@ -44,6 +44,7 @@ rem set "ESMF_CXX=%MINGWBIN%/g++.exe"
 
 rem set "ESMF_F90COMPILEOPTS=-fallow-argument-mismatch"
 set "ESMF_F90COMPILEOPTS=-fpermissive"
+set "ESMF_CXXCOMPILEOPTS=-fpermissive"
 
 set "ESMF_OS=MinGW"
 
