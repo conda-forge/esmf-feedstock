@@ -22,6 +22,7 @@ source:
     # Remove system tests due to time limits on ci
     - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
     - mingw-build-64.patch
+    - mpiuni.patch
 
 build:
   number: {{ build }}
