@@ -21,13 +21,19 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
    ESMC_CATCH_ISOC
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/stubs/mpiuni/mpi.h esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h
 --- esmf-8.4.0/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-26 13:33:29.158491067 +0100
-+++ esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-27 15:00:40.098331154 +0100
-@@ -217,241 +217,243 @@
-     Some return error codes others return success
++++ esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-29 20:20:32.717580811 +0100
+@@ -146,7 +146,7 @@
+ #define MPI_UNDEFINED    678
+ #define MPI_MAX_PROCESSOR_NAME 512
+ #define MPI_MAX_ERROR_STRING 512
+-typedef long MPI_Aint;
++typedef ptrdiff_t MPI_Aint;
+ 
+ /* for moab to build in mpiuni mode */
+ #define MPI_Fint  int
+@@ -218,240 +218,240 @@
  */
  
-+typedef ptrdiff_t MPI_Aint;
-+
  #define MPI_Init(argc,argv) \
 -     (MPIUNI_TMP = (void*)(long) (argc),\
 -      MPIUNI_TMP = (void*)(long) (argv),\
@@ -427,7 +433,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
       MPI_SUCCESS)
       /* Need to determine sizeof "sendtype" */
  #define MPI_Sendrecv(sendbuf,sendcount, sendtype,\
-@@ -475,7 +477,7 @@
+@@ -475,7 +475,7 @@
       array_of_displacements,\
       array_of_types, newtype) MPI_SUCCESS
  #define MPI_Address(location,address) \
@@ -436,7 +442,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
  #define MPI_Type_extent(datatype,extent) \
       MPI_Abort(MPI_COMM_WORLD,0)
  #define MPI_Type_size(datatype,size) \
-@@ -484,7 +486,7 @@
+@@ -484,7 +484,7 @@
       MPI_Abort(MPI_COMM_WORLD,0)
  #define MPI_Type_ub(datatype,displacement) \
       MPI_Abort(MPI_COMM_WORLD,0)
@@ -445,7 +451,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
       MPI_SUCCESS)
  #define MPI_Type_free(datatype) MPI_SUCCESS
  #define MPI_Get_elements(status, datatype,count) \
-@@ -498,69 +500,69 @@
+@@ -498,69 +498,69 @@
  #define MPI_Pack_size(incount, datatype,comm,size) \
       MPI_Abort(MPI_COMM_WORLD,0)
  #define MPI_Barrier(comm) \
@@ -553,7 +559,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
       MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype)),\
       MPI_SUCCESS)
  #define MPI_Alltoall(sendbuf,sendcount, sendtype,\
-@@ -572,13 +574,13 @@
+@@ -572,13 +572,13 @@
  #define MPI_Reduce(sendbuf, recvbuf,count,\
       datatype,op,root,comm) \
       (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype)),\
@@ -570,7 +576,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
  #define MPI_Reduce_scatter(sendbuf, recvbuf,recvcounts,\
       datatype,op,comm) \
       MPI_Abort(MPI_COMM_WORLD,0)
-@@ -595,28 +597,28 @@
+@@ -595,28 +595,28 @@
  #define MPI_Group_range_incl(group,n,ranges,newgroup) MPI_SUCCESS
  #define MPI_Group_range_excl(group,n,ranges,newgroup) MPI_SUCCESS
  #define MPI_Group_free(group) \
@@ -606,7 +612,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
       MPI_SUCCESS)
  #define MPI_Comm_split(comm,color,key,newcomm) MPI_SUCCESS
  #define MPI_Comm_test_inter(comm,flag) (*(flag)=1,MPI_SUCCESS)
-@@ -651,16 +653,16 @@
+@@ -651,16 +651,16 @@
  #define MPI_Get_processor_name(name,result_len) \
       (MPIUNI_Memcpy(name,"localhost",9*sizeof(char)),name[10] = 0,*(result_len) = 10)
  #define MPI_Errhandler_create(function,errhandler) \
