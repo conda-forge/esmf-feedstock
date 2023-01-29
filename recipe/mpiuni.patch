@@ -21,13 +21,13 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
    ESMC_CATCH_ISOC
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/stubs/mpiuni/mpi.h esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h
 --- esmf-8.4.0/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-26 13:33:29.158491067 +0100
-+++ esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-29 20:20:32.717580811 +0100
++++ esmf-8.4.0.mpiuni/src/Infrastructure/stubs/mpiuni/mpi.h	2023-01-29 21:07:22.631878820 +0100
 @@ -146,7 +146,7 @@
  #define MPI_UNDEFINED    678
  #define MPI_MAX_PROCESSOR_NAME 512
  #define MPI_MAX_ERROR_STRING 512
 -typedef long MPI_Aint;
-+typedef ptrdiff_t MPI_Aint;
++typedef long long MPI_Aint;
  
  /* for moab to build in mpiuni mode */
  #define MPI_Fint  int
