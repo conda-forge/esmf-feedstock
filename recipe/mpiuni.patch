@@ -39,13 +39,13 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
      integer(C_INT), intent(inout) :: rc
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
 --- esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-26 13:33:29.188491272 +0100
-+++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-30 00:24:31.300125655 +0100
++++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-30 11:15:07.256623027 +0100
 @@ -102,13 +102,13 @@
  
  #undef  ESMC_METHOD
  #define ESMC_METHOD "ESMC_InfoGetI8()"
 -void ESMC_InfoGetI8(ESMCI::Info *info, char *key, long int &value, int &esmc_rc, long int *def, int *index, int &fortran_bool_recursive) {
-+void ESMC_InfoGetI8(ESMCI::Info *info, char *key, long long &value, int &esmc_rc, long int *def, int *index, int &fortran_bool_recursive) {
++void ESMC_InfoGetI8(ESMCI::Info *info, char *key, long long &value, int &esmc_rc, long long *def, int *index, int &fortran_bool_recursive) {
    ESMC_CHECK_INIT(info, esmc_rc)
    esmc_rc = ESMF_FAILURE;
    try {
