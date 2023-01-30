@@ -1,3 +1,15 @@
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90 esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
+--- esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-26 13:33:29.187491266 +0100
++++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-30 12:44:00.656327757 +0100
+@@ -3,7 +3,7 @@
+   function c_info_base_get(base_address) bind(C, name="ESMC_BaseGetInfo")
+     use iso_c_binding
+     implicit none
+-    integer(C_LONG), intent(in) :: base_address
++    integer(C_LONG_LONG), intent(in) :: base_address
+     type(C_PTR) :: c_info_base_get
+   end function c_info_base_get
+ 
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90 esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90
 --- esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90	2023-01-26 13:33:29.187491266 +0100
 +++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90	2023-01-30 00:25:33.356539025 +0100
