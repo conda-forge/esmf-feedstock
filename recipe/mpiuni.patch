@@ -1,18 +1,19 @@
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/build/common.mk esmf-8.4.0.mpiuni/build/common.mk
 --- esmf-8.4.0/build/common.mk	2023-01-26 13:33:29.403492742 +0100
-+++ esmf-8.4.0.mpiuni/build/common.mk	2023-01-31 13:36:42.412269488 +0100
-@@ -4018,14 +4018,15 @@
++++ esmf-8.4.0.mpiuni/build/common.mk	2023-01-31 14:13:30.638001805 +0100
+@@ -4018,14 +4018,14 @@
  #  Build (deferred) static library from all objects
  #-------------------------------------------------------------------------------
  defer:
++	cd $(ESMF_OBJDIR)
 +	$(file >$@.lst, $(notdir $(wildcard $(ESMF_OBJDIR)/*.o)))
  ifeq ($(ESMF_OS),MinGW)
- 	cd $(ESMF_OBJDIR) ; \
+-	cd $(ESMF_OBJDIR) ; \
  	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMF_ARCREATEPREFIX)`$(ESMF_DIR)/scripts/path_mingw2win $(ESMFLIB)` \
 -		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
 +		@$@.lst
  else
- 	cd $(ESMF_OBJDIR) ; \
+-	cd $(ESMF_OBJDIR) ; \
  	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMFLIB) \
 -		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
 +		@$@.lst
