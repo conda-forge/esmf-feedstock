@@ -1,3 +1,24 @@
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/build/common.mk esmf-8.4.0.mpiuni/build/common.mk
+--- esmf-8.4.0/build/common.mk	2023-01-26 13:33:29.403492742 +0100
++++ esmf-8.4.0.mpiuni/build/common.mk	2023-01-31 13:36:42.412269488 +0100
+@@ -4018,14 +4018,15 @@
+ #  Build (deferred) static library from all objects
+ #-------------------------------------------------------------------------------
+ defer:
++	$(file >$@.lst, $(notdir $(wildcard $(ESMF_OBJDIR)/*.o)))
+ ifeq ($(ESMF_OS),MinGW)
+ 	cd $(ESMF_OBJDIR) ; \
+ 	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMF_ARCREATEPREFIX)`$(ESMF_DIR)/scripts/path_mingw2win $(ESMFLIB)` \
+-		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
++		@$@.lst
+ else
+ 	cd $(ESMF_OBJDIR) ; \
+ 	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMFLIB) \
+-		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
++		@$@.lst
+ endif
+ 
+ 
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90 esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
 --- esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-26 13:33:29.187491266 +0100
 +++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-30 16:48:37.288699725 +0100
