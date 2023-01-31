@@ -1,6 +1,6 @@
 set "cwd=%cd%"
 
-rem set "LIBRARY_PREFIX=%LIBRARY_PREFIX:\=/%"
+set "LIBRARY_PREFIX=%LIBRARY_PREFIX:\=/%"
 rem set "MINGWBIN=%LIBRARY_PREFIX%/mingw-w64/bin"
 
 rem :: These flags cause errors during CMake; disable for now?
