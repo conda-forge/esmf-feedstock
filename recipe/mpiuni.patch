@@ -92,7 +92,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
      integer(C_INT), intent(inout) :: rc
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/src/ESMCI_Info.C esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMCI_Info.C
 --- esmf-8.4.0/src/Infrastructure/Base/src/ESMCI_Info.C	2023-01-26 13:33:29.188491272 +0100
-+++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMCI_Info.C	2023-02-01 10:57:14.918394032 +0100
++++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMCI_Info.C	2023-02-01 12:09:21.340100862 +0100
 @@ -840,6 +840,7 @@
  template double Info::get(key_t&, const double*, const int*, bool, std::string*, bool) const;
  template int Info::get(key_t&, const int*, const int*, bool, std::string*, bool) const;
@@ -108,6 +108,14 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
 +template void Info::set<long long>(key_t&, long long, bool, const int*, const key_t * const);
  template void Info::set<std::string>(key_t&, std::string, bool, const int*, const key_t * const);
  template void Info::set<bool>(key_t&, bool, bool, const int*, const key_t * const);
+ 
+@@ -1421,6 +1423,7 @@
+ template void Info::set<double>(key_t&, double*, int, bool, const key_t * const);
+ template void Info::set<int>(key_t&, int*, int, bool, const key_t * const);
+ template void Info::set<long int>(key_t&, long int*, int, bool, const key_t * const);
++template void Info::set<long long>(key_t&, long long*, int, bool, const key_t * const);
+ template void Info::set<bool>(key_t&, bool*, int, bool, const key_t * const);
+ template void Info::set<std::vector<std::string>>(key_t&, std::vector<std::string>*, int, bool, const key_t * const);
  
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
 --- esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-26 13:33:29.188491272 +0100
