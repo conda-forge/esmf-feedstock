@@ -19,6 +19,42 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/build/common.
  endif
  
  
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/scripts/abspath esmf-8.4.0.mpiuni/scripts/abspath
+--- esmf-8.4.0/scripts/abspath	2023-01-26 13:33:28.862489045 +0100
++++ esmf-8.4.0.mpiuni/scripts/abspath	2023-02-01 17:42:54.832259609 +0100
+@@ -2,9 +2,9 @@
+ # this script returns the absolute path
+ workdir=`pwd`
+ abspath=$1
+-firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
+-if ([ ! $firstchar = "/" ]); then
+-abspath=$workdir/$1
+-fi
+-abspath=`echo $abspath | sed 's/\/\.\//\//g'`
++# firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
++# if ([ ! $firstchar = "/" ]); then
++# abspath=$workdir/$1
++# fi
++# abspath=`echo $abspath | sed 's/\/\.\//\//g'`
+ echo $abspath
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/scripts/pathtype esmf-8.4.0.mpiuni/scripts/pathtype
+--- esmf-8.4.0/scripts/pathtype	2023-01-26 13:33:28.872489113 +0100
++++ esmf-8.4.0.mpiuni/scripts/pathtype	2023-02-01 17:41:55.267868502 +0100
+@@ -1,8 +1,9 @@
+ #!/bin/sh
+ # return "abs" if input path absolute and "rel" if input path relative
+-firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
+-if ([ $firstchar = "/" ]); then
++# firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
++# if ([ $firstchar = "/" ]); then
++# echo "abs"
++# else
++# echo "rel"
++# fi
+ echo "abs"
+-else
+-echo "rel"
+-fi
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90 esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
 --- esmf-8.4.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-26 13:33:29.187491266 +0100
 +++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2023-01-30 16:48:37.288699725 +0100
