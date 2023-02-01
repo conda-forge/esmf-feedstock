@@ -90,6 +90,25 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastru
      integer(C_INT), intent(in) :: itemcount
      logical(C_BOOL), intent(in) :: force
      integer(C_INT), intent(inout) :: rc
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/src/ESMCI_Info.C esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMCI_Info.C
+--- esmf-8.4.0/src/Infrastructure/Base/src/ESMCI_Info.C	2023-01-26 13:33:29.188491272 +0100
++++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMCI_Info.C	2023-02-01 10:57:14.918394032 +0100
+@@ -840,6 +840,7 @@
+ template double Info::get(key_t&, const double*, const int*, bool, std::string*, bool) const;
+ template int Info::get(key_t&, const int*, const int*, bool, std::string*, bool) const;
+ template long int Info::get(key_t&, const long int*, const int*, bool, std::string*, bool) const;
++template long long Info::get(key_t&, const long long*, const int*, bool, std::string*, bool) const;
+ template bool Info::get(key_t&, const bool*, const int*, bool, std::string*, bool) const;
+ template std::string Info::get(key_t&, const std::string*, const int*, bool, std::string*, bool) const;
+ template json Info::get(key_t&, const json*, const int*, bool, std::string*, bool) const;
+@@ -1389,6 +1390,7 @@
+ template void Info::set<double>(key_t&, double, bool, const int*, const key_t * const);
+ template void Info::set<int>(key_t&, int, bool, const int*, const key_t * const);
+ template void Info::set<long int>(key_t&, long int, bool, const int*, const key_t * const);
++template void Info::set<long long>(key_t&, long long, bool, const int*, const key_t * const);
+ template void Info::set<std::string>(key_t&, std::string, bool, const int*, const key_t * const);
+ template void Info::set<bool>(key_t&, bool, bool, const int*, const key_t * const);
+ 
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
 --- esmf-8.4.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-26 13:33:29.188491272 +0100
 +++ esmf-8.4.0.mpiuni/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2023-01-30 11:15:07.256623027 +0100
