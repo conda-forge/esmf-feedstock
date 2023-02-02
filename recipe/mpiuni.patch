@@ -1,6 +1,21 @@
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/build/common.mk esmf-8.4.0.mpiuni/build/common.mk
 --- esmf-8.4.0/build/common.mk	2023-01-26 13:33:29.403492742 +0100
-+++ esmf-8.4.0.mpiuni/build/common.mk	2023-01-31 15:35:59.297132051 +0100
++++ esmf-8.4.0.mpiuni/build/common.mk	2023-02-02 11:47:10.394690587 +0100
+@@ -1433,10 +1433,10 @@
+ ifdef ESMF_NETCDF
+   pathtype := $(shell $(ESMF_DIR)/scripts/pathtype $(ESMF_NETCDF))
+ endif
+-ifeq ($(pathtype),abs)
+-  # use the $(ESMF_NETCDF) contents as nc-config
+-  ESMF_NCCONFIG = $(ESMF_NETCDF)
+-endif
++# ifeq ($(pathtype),abs)
++#   # use the $(ESMF_NETCDF) contents as nc-config
++#   ESMF_NCCONFIG = $(ESMF_NETCDF)
++# endif
+ ifeq ($(ESMF_NETCDF),nc-config)
+   ESMF_NCCONFIG = $(ESMF_NETCDF)
+ endif
 @@ -4018,14 +4018,15 @@
  #  Build (deferred) static library from all objects
  #-------------------------------------------------------------------------------
