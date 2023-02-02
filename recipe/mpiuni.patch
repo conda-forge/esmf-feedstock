@@ -36,14 +36,18 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/build/common.
  
 diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0/makefile esmf-8.4.0.mpiuni/makefile
 --- esmf-8.4.0/makefile	2023-01-26 13:33:28.882489182 +0100
-+++ esmf-8.4.0.mpiuni/makefile	2023-02-02 14:05:02.351118830 +0100
-@@ -701,6 +701,9 @@
++++ esmf-8.4.0.mpiuni/makefile	2023-02-02 16:45:48.445122741 +0100
+@@ -700,7 +700,13 @@
+ 	mkdir -p $(ESMF_INSTALL_MODDIR_ABSPATH)
  	cp -f $(ESMF_MODDIR)/*.mod $(ESMF_INSTALL_MODDIR_ABSPATH)
  	mkdir -p $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	cp -f $(ESMF_LIBDIR)/libesmf.dll $(ESMF_LIBDIR)/esmf.dll
++	cp -f $(ESMF_LIBDIR)/libesmf_fullylinked.dll $(ESMF_LIBDIR)/esmf_fullylinked.dll
++	cp -f $(ESMF_LIBDIR)/libesmf.lib $(ESMF_LIBDIR)/esmf.lib
  	cp -f $(ESMF_LIBDIR)/libesmf*.* $(ESMF_INSTALL_LIBDIR_ABSPATH)
-+	cp -f $(ESMF_LIBDIR)/libesmf.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)/esmf.dll
-+	cp -f $(ESMF_LIBDIR)/libesmf_fullylinked.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)/esmf_fullylinked.dll
-+	cp -f $(ESMF_LIBDIR)/libesmf.lib $(ESMF_INSTALL_LIBDIR_ABSPATH)/esmf.lib
++	cp -f $(ESMF_LIBDIR)/esmf.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	cp -f $(ESMF_LIBDIR)/esmf_fullylinked.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	cp -f $(ESMF_LIBDIR)/esmf.lib $(ESMF_INSTALL_LIBDIR_ABSPATH)
  
  ifeq ($(ESMF_PIO),internal)
  	cp -f $(ESMF_LIBDIR)/libpioc.* $(ESMF_INSTALL_LIBDIR_ABSPATH)
