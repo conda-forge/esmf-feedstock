@@ -55,4 +55,4 @@ mingw32-make -j%CPU_COUNT%
 mingw32-make install
 mingw32-make check
 
-sed -i.bu "s:%BUILD_PREFIX%:%LIBRARY_PREFIX%:g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
+sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
