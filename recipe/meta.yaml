@@ -21,8 +21,14 @@ source:
     - remove-long-running-tests.patch
     # Remove system tests due to time limits on ci
     - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
-    - mingw-build-64.patch
-    - mpiuni.patch
+    # Sequence of Windows targeting patches; should be unix compatible
+    - 0001-Add-x86_64-machine-id-for-MinGW.gfortran.patch
+    - 0002-Change-long-int-to-long-long-for-Windows-compatibili.patch
+    - 0003-Deal-with-command-line-length-limitations.patch
+    - 0004-Deactivate-ESMF_NETCDF-way-of-specifying-nc-config.patch
+    - 0005-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
+    - 0006-Make-pathtype-recognize-Windows-style-absolute-paths.patch
+    - 0007-Hack-in-windows-naming-conventions.patch
 
 build:
   number: {{ build }}

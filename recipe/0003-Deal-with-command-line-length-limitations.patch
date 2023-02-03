@@ -1,0 +1,34 @@
+From e23502e6a1c1319be1fb32962595644c101c9156 Mon Sep 17 00:00:00 2001
+From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
+Date: Fri, 3 Feb 2023 10:49:02 +0100
+Subject: [PATCH 3/7] Deal with command line length limitations
+
+---
+ build/common.mk | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/build/common.mk b/build/common.mk
+index 7bce715e6a..eaefaef62e 100644
+--- a/build/common.mk
++++ b/build/common.mk
+@@ -4019,14 +4019,15 @@ shared:
+ #  Build (deferred) static library from all objects
+ #-------------------------------------------------------------------------------
+ defer:
++	$(file >$(ESMF_OBJDIR)/$@.lst, $(notdir $(wildcard $(ESMF_OBJDIR)/*.o)))
+ ifeq ($(ESMF_OS),MinGW)
+ 	cd $(ESMF_OBJDIR) ; \
+ 	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMF_ARCREATEPREFIX)`$(ESMF_DIR)/scripts/path_mingw2win $(ESMFLIB)` \
+-		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
++		@$@.lst
+ else
+ 	cd $(ESMF_OBJDIR) ; \
+ 	$(ESMF_AR) $(ESMF_ARCREATEFLAGS) $(ESMFLIB) \
+-		$(notdir $(wildcard $(ESMF_OBJDIR)/*.o))
++		@$@.lst
+ endif
+ 
+ 
+-- 
+2.39.1
+

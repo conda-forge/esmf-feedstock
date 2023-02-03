@@ -1,0 +1,25 @@
+From 39c490d3fdbd5b8d1eafdf044ca4e44ff11c2211 Mon Sep 17 00:00:00 2001
+From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
+Date: Fri, 3 Feb 2023 10:23:31 +0100
+Subject: [PATCH 1/7] Add x86_64 machine id for MinGW.gfortran
+
+---
+ build_config/MinGW.gfortran.default/build_rules.mk | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/build_config/MinGW.gfortran.default/build_rules.mk b/build_config/MinGW.gfortran.default/build_rules.mk
+index 6bd8a7f6f6..1223d7fa14 100644
+--- a/build_config/MinGW.gfortran.default/build_rules.mk
++++ b/build_config/MinGW.gfortran.default/build_rules.mk
+@@ -98,6 +98,8 @@ endif
+ ifeq ($(ESMF_ABI),64)
+ ESMF_ABISTRING := x86_64_small
+ endif
++else ifeq ($(ESMF_MACHINE),x86_64)
++ESMF_ABISTRING := x86_64_small
+ else
+ $(error "ESMF_MACHINE = $(ESMF_MACHINE)" not recognized)
+ endif
+-- 
+2.39.1
+
