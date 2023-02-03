@@ -27,16 +27,12 @@ source:
 build:
   number: {{ build }}
   skip: true  # [not win]
-  # script_env:
-  #   - TMP
-  #   - TEMP
 
   # add build string so packages can depend on
   # mpi or nompi variants explicitly:
   # `esmf * mpi_mpich_*` for mpich
   # `esmf * mpi_*` for any mpi
   # `esmf * nompi_*` for no mpi
-
   {% if mpi != 'nompi' %}
   {% set mpi_prefix = "mpi_" + mpi %}
   {% else %}
