@@ -1,4 +1,4 @@
-From 64af58085c5d6613158c6b99601fdf410aeacd96 Mon Sep 17 00:00:00 2001
+From 42070ca5203b3ac1cfb3d7c4e36d060c4d89558d Mon Sep 17 00:00:00 2001
 From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
 Date: Fri, 3 Feb 2023 11:54:15 +0100
 Subject: [PATCH 5/7] Replace flaky abspath script with make's abspath function
@@ -10,7 +10,7 @@ Subject: [PATCH 5/7] Replace flaky abspath script with make's abspath function
  delete mode 100755 scripts/abspath
 
 diff --git a/build/common.mk b/build/common.mk
-index 3bf68c8d52..3620567f2f 100644
+index 24860650ee..7831169f5e 100644
 --- a/build/common.mk
 +++ b/build/common.mk
 @@ -486,7 +486,7 @@ endif

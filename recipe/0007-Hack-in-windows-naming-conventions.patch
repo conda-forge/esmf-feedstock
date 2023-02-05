@@ -1,4 +1,4 @@
-From 573fabdab116f7cfacadaf8554fd9c66ee52a124 Mon Sep 17 00:00:00 2001
+From 49e11aff15320f8735d97f9593586edc55b6324b Mon Sep 17 00:00:00 2001
 From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
 Date: Fri, 3 Feb 2023 13:30:13 +0100
 Subject: [PATCH 7/7] Hack in windows naming conventions

@@ -1,4 +1,4 @@
-From 8642fd5c077ff27eeb0fae4b7ffcfb929e9e511e Mon Sep 17 00:00:00 2001
+From c2aa58965016986b3c0c812f3048be38b0c6a2fc Mon Sep 17 00:00:00 2001
 From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
 Date: Fri, 3 Feb 2023 13:22:24 +0100
 Subject: [PATCH 6/7] Make pathtype recognize Windows style absolute paths
