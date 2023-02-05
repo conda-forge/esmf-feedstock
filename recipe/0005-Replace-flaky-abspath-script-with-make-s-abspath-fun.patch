@@ -1,0 +1,52 @@
+From 42070ca5203b3ac1cfb3d7c4e36d060c4d89558d Mon Sep 17 00:00:00 2001
+From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
+Date: Fri, 3 Feb 2023 11:54:15 +0100
+Subject: [PATCH 5/7] Replace flaky abspath script with make's abspath function
+
+---
+ build/common.mk |  4 ++--
+ scripts/abspath | 10 ----------
+ 2 files changed, 2 insertions(+), 12 deletions(-)
+ delete mode 100755 scripts/abspath
+
+diff --git a/build/common.mk b/build/common.mk
+index 24860650ee..7831169f5e 100644
+--- a/build/common.mk
++++ b/build/common.mk
+@@ -486,7 +486,7 @@ endif
+ ifndef ESMF_INSTALL_PREFIX
+ ESMF_INSTALL_PREFIX := ./DEFAULTINSTALLDIR
+ endif
+-ESMF_INSTALL_PREFIX_ABSPATH := $(shell $(ESMF_DIR)/scripts/abspath $(ESMF_INSTALL_PREFIX))
++ESMF_INSTALL_PREFIX_ABSPATH := $(abspath $(ESMF_INSTALL_PREFIX))
+ 
+ ifndef ESMF_INSTALL_HEADERDIR
+ ESMF_INSTALL_HEADERDIR := include
+@@ -553,7 +553,7 @@ endif
+ ifndef ESMF_BENCHMARK_PREFIX
+ ESMF_BENCHMARK_PREFIX := ./DEFAULTBENCHMARKDIR
+ endif
+-ESMF_BENCHMARK_PREFIX_ABSPATH := $(shell $(ESMF_DIR)/scripts/abspath $(ESMF_BENCHMARK_PREFIX))
++ESMF_BENCHMARK_PREFIX_ABSPATH := $(abspath $(ESMF_BENCHMARK_PREFIX))
+ 
+ 
+ ifndef ESMF_BENCHMARK_TOLERANCE
+diff --git a/scripts/abspath b/scripts/abspath
+deleted file mode 100755
+index 6374f548d9..0000000000
+--- a/scripts/abspath
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/sh
+-# this script returns the absolute path
+-workdir=`pwd`
+-abspath=$1
+-firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
+-if ([ ! $firstchar = "/" ]); then
+-abspath=$workdir/$1
+-fi
+-abspath=`echo $abspath | sed 's/\/\.\//\//g'`
+-echo $abspath
+-- 
+2.39.1
+

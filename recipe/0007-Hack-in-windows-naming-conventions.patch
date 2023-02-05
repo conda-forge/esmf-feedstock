@@ -1,0 +1,42 @@
+From 49e11aff15320f8735d97f9593586edc55b6324b Mon Sep 17 00:00:00 2001
+From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
+Date: Fri, 3 Feb 2023 13:30:13 +0100
+Subject: [PATCH 7/7] Hack in windows naming conventions
+
+---
+ makefile | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/makefile b/makefile
+index 5d66726882..cfc96bff7d 100644
+--- a/makefile
++++ b/makefile
+@@ -700,7 +700,17 @@ install:
+ 	mkdir -p $(ESMF_INSTALL_MODDIR_ABSPATH)
+ 	cp -f $(ESMF_MODDIR)/*.mod $(ESMF_INSTALL_MODDIR_ABSPATH)
+ 	mkdir -p $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	$(ESMF_RANLIB) $(ESMF_LIBDIR)/libesmf*.$(ESMF_LIB_SUFFIX)
++ifeq ($(ESMF_OS),MinGW)
++	mv $(ESMF_LIBDIR)/libesmf.dll $(ESMF_LIBDIR)/esmf.dll
++	mv $(ESMF_LIBDIR)/libesmf_fullylinked.dll $(ESMF_LIBDIR)/esmf_fullylinked.dll
++	mv $(ESMF_LIBDIR)/libesmf.lib $(ESMF_LIBDIR)/esmf.lib
++	cp -f $(ESMF_LIBDIR)/esmf.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	cp -f $(ESMF_LIBDIR)/esmf_fullylinked.dll $(ESMF_INSTALL_LIBDIR_ABSPATH)
++	cp -f $(ESMF_LIBDIR)/esmf.lib $(ESMF_INSTALL_LIBDIR_ABSPATH)
++else
+ 	cp -f $(ESMF_LIBDIR)/libesmf*.* $(ESMF_INSTALL_LIBDIR_ABSPATH)
++endif
+ 
+ ifeq ($(ESMF_PIO),internal)
+ 	cp -f $(ESMF_LIBDIR)/libpioc.* $(ESMF_INSTALL_LIBDIR_ABSPATH)
+@@ -721,7 +731,6 @@ ifeq ($(ESMF_TRACE_BUILD_SHARED),ON)
+ 	$(MAKE) ESMF_PRELOADDIR=$(ESMF_INSTALL_LIBDIR_ABSPATH) build_preload_script
+ endif
+ endif
+-	$(ESMF_RANLIB) $(ESMF_INSTALL_LIBDIR_ABSPATH)/libesmf*.$(ESMF_LIB_SUFFIX)
+ 	$(MAKE) install_apps
+ 	mkdir -p $(ESMF_INSTALL_DOCDIR_ABSPATH)
+ 	@if [ -d $(ESMF_DOCDIR) ]; then \
+-- 
+2.39.1
+

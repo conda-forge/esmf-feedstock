@@ -1,0 +1,27 @@
+From 0f4570d16a7ef66ba361dfecf893670d6232a2af Mon Sep 17 00:00:00 2001
+From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
+Date: Fri, 3 Feb 2023 10:51:29 +0100
+Subject: [PATCH 4/7] Deactivate ESMF_NETCDF way of specifying nc-config
+
+---
+ build/common.mk | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/build/common.mk b/build/common.mk
+index 6c5d35e2ac..24860650ee 100644
+--- a/build/common.mk
++++ b/build/common.mk
+@@ -1433,10 +1433,6 @@ pathtype := ""
+ ifdef ESMF_NETCDF
+   pathtype := $(shell $(ESMF_DIR)/scripts/pathtype $(ESMF_NETCDF))
+ endif
+-ifeq ($(pathtype),abs)
+-  # use the $(ESMF_NETCDF) contents as nc-config
+-  ESMF_NCCONFIG = $(ESMF_NETCDF)
+-endif
+ ifeq ($(ESMF_NETCDF),nc-config)
+   ESMF_NCCONFIG = $(ESMF_NETCDF)
+ endif
+-- 
+2.39.1
+
