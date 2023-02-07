@@ -28,7 +28,7 @@ do
         --src_loc center \
         --dst_loc center \
         --src_regional \
-        --ignore_unmapped
+        --ignore_unmapped || cat PET*.Log
   done
 done
 
@@ -50,6 +50,6 @@ do
         --src_loc center \
         --dst_loc center \
         --dst_regional \
-        --ignore_unmapped
+        --ignore_unmapped || cat PET*.Log
   done
 done
