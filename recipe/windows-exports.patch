@@ -1,0 +1,12 @@
+diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS -x '*.ESMF_LogFile' -x '*.egg-info' -x .pytest_cache -x .report.json -x 'esmpy*.test' -x build esmf-8.4.0.patched/build_config/MinGW.gfortran.default/build_rules.mk esmf-8.4.0/build_config/MinGW.gfortran.default/build_rules.mk
+--- esmf-8.4.0.patched/build_config/MinGW.gfortran.default/build_rules.mk	2023-02-07 10:15:08.882793599 +0100
++++ esmf-8.4.0/build_config/MinGW.gfortran.default/build_rules.mk	2023-02-07 10:16:30.321004764 +0100
+@@ -217,7 +217,7 @@
+ ############################################################
+ # Shared library options
+ #
+-ESMF_SL_LIBOPTS  += -shared
++ESMF_SL_LIBOPTS  += -shared -Wl,--export-all-symbols
+ ESMF_SL_LIBLIBS       += $(ESMF_CXXLINKPATHS) $(ESMF_CXXLINKLIBS) -lgfortran
+ 
+ ############################################################
