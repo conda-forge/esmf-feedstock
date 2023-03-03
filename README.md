@@ -1,11 +1,11 @@
-About esmf
-==========
+About esmf-feedstock
+====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/esmf-feedstock/blob/main/LICENSE.txt)
 
 Home: http://earthsystemmodeling.org/
 
 Package license: NCSA
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/esmf-feedstock/blob/main/LICENSE.txt)
 
 Summary: The Earth System Modeling Framework (ESMF) is software for building and
 coupling weather, climate, and related models.'
