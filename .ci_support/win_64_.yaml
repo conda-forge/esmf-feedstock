@@ -12,14 +12,10 @@ m2w64_cxx_compiler:
 - m2w64-toolchain
 m2w64_fortran_compiler:
 - m2w64-toolchain
-mpi:
-- nompi
 mpich:
 - '4'
 netcdf_fortran:
 - '4.6'
-openmpi:
-- '4'
 perl:
 - 5.32.1
 target_platform:
