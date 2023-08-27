@@ -96,6 +96,8 @@ test:
   commands:
     - ESMF_PrintInfo
     - ESMF_RegridWeightGen --help
+    - test -f ${ESMFMKFILE}  # [unix]
+    - if not exist %ESMFMKFILE% exit 1   # [win]
 
 about:
   home: http://earthsystemmodeling.org/
