@@ -95,3 +95,13 @@ if [[ $(uname) == Darwin ]]; then
     install_name_tool -change $ESMF_ORIGINAL_LIB_PATH $ESMF_LIB_PATH ${ESMF_APP_PATH}
   done
 fi
+
+for shell in sh csh fish
+do
+  for act_deact in activate deactivate
+  do
+    act_deact_dir=${PREFIX}/etc/conda/${act_deact}.d
+    mkdir -p ${act_deact_dir}
+    cp ${RECIPE_DIR}/scripts/${act_deact}.${shell} ${act_deact_dir}/esmf-${act_deact}.${shell}
+  done
+done
