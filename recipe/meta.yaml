@@ -18,9 +18,9 @@ source:
   sha256: acd0b2641587007cc3ca318427f47b9cae5bfd2da8d2a16ea778f637107c29c4
   patches:
     # Always remove these very long running tests
-    - remove-long-running-tests.patch
+    # - remove-long-running-tests.patch
     # Remove system tests due to time limits on ci
-    - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
+    # - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
     # Sequence of Windows targeting patches; should be unix compatible
     - 0001-Add-x86_64-machine-id-for-MinGW.gfortran.patch
     - 0002-Change-long-int-to-long-long-for-Windows-compatibili.patch
