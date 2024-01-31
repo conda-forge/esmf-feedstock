@@ -18,7 +18,7 @@ source:
   sha256: ed057eaddb158a3cce2afc0712b49353b7038b45b29aee86180f381457c0ebe7
   patches:
     # Always remove these very long running tests
-    - remove-long-running-tests.patch
+    # - remove-long-running-tests.patch
     # Remove system tests due to time limits on ci
     - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
     # Sequence of Windows targeting patches; should be unix compatible
