@@ -57,8 +57,8 @@ requirements:
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
-    - {{ compiler('c') }}  # [not win]
     # Unix
+    - {{ compiler('c') }}  # [unix]
     - {{ compiler('cxx') }}  # [unix]
     - {{ compiler('fortran') }}  # [unix]
     - make  # [unix]
