@@ -45,6 +45,9 @@ build:
   {% set mpi_prefix = "nompi" %}
   {% endif %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
+  # There is a compiler error in the current Windows version of gcc, see
+  # https://github.com/conda-forge/esmf-feedstock/pull/109#issuecomment-1795477835
+  skip: true  # [win]
 
 requirements:
   build:
