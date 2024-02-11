@@ -54,6 +54,9 @@ if [[ -z "$mpi" || "$mpi" == "nompi" ]]; then
   export ESMF_F90=${FC}
   export ESMF_CXX=${CXX}
   export ESMF_C=${CC}
+  export ESMF_F90LINKER=${FC}
+  export ESMF_CXXLINKER=${CXX}
+  export ESMF_CLINKER=${CC}
 else
   export ESMF_F90=mpif90
   export ESMF_CXX=mpicxx
