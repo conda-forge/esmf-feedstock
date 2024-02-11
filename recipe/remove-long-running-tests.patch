@@ -1,37 +1,49 @@
-diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile
---- esmf-8.4.0.orig/src/Infrastructure/Mesh/tests/makefile	2022-10-25 00:04:55.000000000 +0200
-+++ esmf-8.4.0/src/Infrastructure/Mesh/tests/makefile	2022-12-01 13:46:56.167361973 +0100
+diff -ruN esmf-8.6.0/src/Infrastructure/Mesh/tests/makefile esmf-8.6.0-patch/src/Infrastructure/Mesh/tests/makefile
+--- esmf-8.6.0/src/Infrastructure/Mesh/tests/makefile	2023-11-09 23:05:45.000000000 +0100
++++ esmf-8.6.0-patch/src/Infrastructure/Mesh/tests/makefile	2024-02-11 17:07:27.741030938 +0100
+@@ -1,4 +1,4 @@
+-# $Id$ 
++# $Id$
+ 
+ ALL:      build_unit_tests
+ run:      run_unit_tests
 @@ -11,8 +11,6 @@
  TESTS_BUILD	  = \
-                 $(ESMF_TESTDIR)/ESMC_MBMesh_ExtrapolateUTest \
-                 $(ESMF_TESTDIR)/ESMC_MBMesh_UtilUTest \
--                $(ESMF_TESTDIR)/ESMC_MeshCapUTest \
--                $(ESMF_TESTDIR)/ESMC_MeshCapRegridUTest \
-                 $(ESMF_TESTDIR)/ESMC_MeshMOABUTest \
+                 $(ESMF_TESTDIR)/ESMCI_MBMesh_ExtrapolateUTest \
+                 $(ESMF_TESTDIR)/ESMCI_MBMesh_UtilUTest \
+-                $(ESMF_TESTDIR)/ESMCI_MeshCapUTest \
+-                $(ESMF_TESTDIR)/ESMCI_MeshCapRegridUTest \
+                 $(ESMF_TESTDIR)/ESMCI_MeshMOABUTest \
                  $(ESMF_TESTDIR)/ESMCI_IntegrateUTest \
-                 $(ESMF_TESTDIR)/ESMC_MeshUTest \
-@@ -30,8 +28,6 @@
+                 $(ESMF_TESTDIR)/ESMCI_MeshUTest \
+@@ -31,8 +29,6 @@
  TESTS_RUN    =  \
-                 RUN_ESMC_MBMesh_ExtrapolateUTest \
-                 RUN_ESMC_MBMesh_UtilUTest \
--                RUN_ESMC_MeshCapUTest \
--                RUN_ESMC_MeshCapRegridUTest \
-                 RUN_ESMC_MeshMOABUTest \
+                 RUN_ESMCI_MBMesh_ExtrapolateUTest \
+                 RUN_ESMCI_MBMesh_UtilUTest \
+-                RUN_ESMCI_MeshCapUTest \
+-                RUN_ESMCI_MeshCapRegridUTest \
+                 RUN_ESMCI_MeshMOABUTest \
                  RUN_ESMCI_IntegrateUTest \
-                 RUN_ESMC_MeshUTest \
-@@ -44,8 +40,6 @@
+                 RUN_ESMCI_MeshUTest \
+@@ -46,8 +42,6 @@
  
  TESTS_RUN_UNI = \
-                 RUN_ESMC_MBMesh_UtilUTestUNI \
--                RUN_ESMC_MeshCapUTestUNI \
--                RUN_ESMC_MeshCapRegridUTestUNI \
-                 RUN_ESMC_MeshMOABUTestUNI \
+                 RUN_ESMCI_MBMesh_UtilUTestUNI \
+-                RUN_ESMCI_MeshCapUTestUNI \
+-                RUN_ESMCI_MeshCapRegridUTestUNI \
+                 RUN_ESMCI_MeshMOABUTestUNI \
                  RUN_ESMCI_IntegrateUTestUNI \
-                 RUN_ESMC_MeshUTestUNI \
-diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Superstructure/PreESMFMod/tests/makefile esmf-8.4.0/src/Superstructure/PreESMFMod/tests/makefile
---- esmf-8.4.0.orig/src/Superstructure/PreESMFMod/tests/makefile	2022-10-25 00:04:55.000000000 +0200
-+++ esmf-8.4.0/src/Superstructure/PreESMFMod/tests/makefile	2022-12-01 13:48:07.895743347 +0100
-@@ -8,15 +8,12 @@
+                 RUN_ESMCI_MeshUTestUNI \
+diff -ruN esmf-8.6.0/src/Superstructure/PreESMFMod/tests/makefile esmf-8.6.0-patch/src/Superstructure/PreESMFMod/tests/makefile
+--- esmf-8.6.0/src/Superstructure/PreESMFMod/tests/makefile	2023-11-09 23:05:45.000000000 +0100
++++ esmf-8.6.0-patch/src/Superstructure/PreESMFMod/tests/makefile	2024-02-11 17:08:01.688698509 +0100
+@@ -1,4 +1,4 @@
+-# $Id$ 
++# $Id$
+ 
+ ALL:      build_unit_tests
+ run:      run_unit_tests
+@@ -8,24 +8,21 @@
  
  .NOTPARALLEL:
  TESTS_BUILD   = \
@@ -47,9 +59,26 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/Supe
  		RUN_ESMF_FileRegridUTestUNI
  
  include ${ESMF_DIR}/makefile
-diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/system_tests/makefile esmf-8.4.0/src/system_tests/makefile
---- esmf-8.4.0.orig/src/system_tests/makefile	2022-10-25 00:04:55.000000000 +0200
-+++ esmf-8.4.0/src/system_tests/makefile	2022-12-01 13:44:32.032595613 +0100
+ 
+-CLEANDIRS   = 
++CLEANDIRS   =
+ CLEANFILES  = $(TESTS_BUILD)
+ CLOBBERDIRS =
+ 
+-DIRS        = 
++DIRS        =
+ 
+ #
+ # unit test targets
+diff -ruN esmf-8.6.0/src/system_tests/makefile esmf-8.6.0-patch/src/system_tests/makefile
+--- esmf-8.6.0/src/system_tests/makefile	2023-11-09 23:05:45.000000000 +0100
++++ esmf-8.6.0-patch/src/system_tests/makefile	2024-02-11 17:09:04.104088886 +0100
+@@ -1,4 +1,4 @@
+-# $Id$ 
++# $Id$
+ 
+ ALL: build_system_tests
+ 
 @@ -13,13 +13,10 @@
              ESMF_ArrayScatterGather \
              ESMF_Attribute \
@@ -64,7 +93,7 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/syst
              ESMF_ArrayRedistOpenMP \
              ESMF_ArrayRedistOpenACC \
              ESMF_ArraySharedDeSSI \
-@@ -50,8 +47,6 @@
+@@ -50,20 +47,18 @@
              ESMF_FieldLSRedistArb2ArbUngrdDim \
              ESMF_FieldLSSMM \
              ESMF_FieldMeshSMM \
@@ -73,3 +102,18 @@ diff -ruN -x __pycache__ -x obj -x '*~' -x tags -x TAGS esmf-8.4.0.orig/src/syst
              ESMF_SequentialEnsemble \
              ESMF_ConcurrentEnsemble \
              ESMF_DirectCoupling \
+             ESMF_XGridConcurrent \
+             ESMF_XGridSerial \
+             ESMF_Trace
+-            
+-ifeq ($(ESMF_MAPPER_BUILD),ON)            
++
++ifeq ($(ESMF_MAPPER_BUILD),ON)
+ DIRS     += ESMF_MapperTwoConcurrentComps \
+             ESMF_MapperSimpleTwoConcurrentComps
+ endif
+-            
++
+ # Disabled STests
+ #           ESMF_FieldRegridConserv \ cover by Regrid
+ #           ESMF_FieldRegridMulti \   cover by Regrid

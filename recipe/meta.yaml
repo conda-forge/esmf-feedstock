@@ -1,5 +1,5 @@
-{% set version = "8.4.2" %}
-{% set build = 3 %}
+{% set version = "8.6.0" %}
+{% set build = 0 %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -15,12 +15,10 @@ package:
 
 source:
   url: https://github.com/esmf-org/esmf/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 969304efa518c7859567fa6e65efd960df2b4f6d72dbf2c3f29e39e4ab5ae594
+  sha256: ed057eaddb158a3cce2afc0712b49353b7038b45b29aee86180f381457c0ebe7
   patches:
-    # Always remove these very long running tests
-    - remove-long-running-tests.patch
-    # Remove system tests due to time limits on ci
-    - deactivate-system-tests.patch  # [(aarch64 or ppc64le) and mpi == 'mpich']
+    # remove these very long running tests only for aarch64 nompi (which is hanging)
+    - remove-long-running-tests.patch  # [aarch64 and mpi == 'nompi']
     # Sequence of Windows targeting patches; should be unix compatible
     - 0001-Add-x86_64-machine-id-for-MinGW.gfortran.patch
     - 0002-Change-long-int-to-long-long-for-Windows-compatibili.patch
@@ -29,6 +27,7 @@ source:
     - 0005-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
     - 0006-Make-pathtype-recognize-Windows-style-absolute-paths.patch
     - 0007-Hack-in-windows-naming-conventions.patch
+    - 0008-Fix-ESMF_NO_GETHOSTID.patch
     - windows-exports.patch
 
 build:
@@ -46,6 +45,9 @@ build:
   {% set mpi_prefix = "nompi" %}
   {% endif %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
+  # There is a compiler error in the current Windows version of gcc, see
+  # https://github.com/conda-forge/esmf-feedstock/pull/109#issuecomment-1795477835
+  skip: true  # [win]
 
 requirements:
   build:
