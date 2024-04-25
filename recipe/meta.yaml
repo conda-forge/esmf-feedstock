@@ -27,7 +27,6 @@ source:
     - 0005-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
     - 0006-Make-pathtype-recognize-Windows-style-absolute-paths.patch
     - 0007-Hack-in-windows-naming-conventions.patch
-    - 0008-Fix-ESMF_NO_GETHOSTID.patch
     - windows-exports.patch
 
 build:
