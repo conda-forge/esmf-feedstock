@@ -107,7 +107,9 @@ about:
   license_file: LICENSE
   summary: |
     The Earth System Modeling Framework (ESMF) is software for building and
-    coupling weather, climate, and related models.'
+    coupling weather, climate, and related models.
+  dev_url: https://github.com/esmf-org/esmf
+  doc_url: https://earthsystemmodeling.org/doc/
 
 extra:
   recipe-maintainers:
