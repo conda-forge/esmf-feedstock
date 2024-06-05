@@ -33,7 +33,7 @@ mpich:
 netcdf_fortran:
 - '4.6'
 openmpi:
-- '4'
+- '5'
 perl:
 - 5.32.1
 target_platform:
