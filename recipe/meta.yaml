@@ -53,6 +53,9 @@ requirements:
     # General
     - perl
     - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
+    # needed for proper handling of clock_gettime, etc?
+    # see https://github.com/conda-forge/openmpi-feedstock/issues/143#issuecomment-2050093819
+    - openmpi-mpifort  # [mpi == 'openmpi']
     - cmake
     - gnuconfig
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
