@@ -3,5 +3,6 @@ mpi:
   - mpich  # [not win]
   - openmpi  # [not win]
 
+# needed to avoid issue in https://github.com/conda-forge/openmpi-feedstock/issues/143
 c_stdlib_version:
   - 2.17  # [linux]
