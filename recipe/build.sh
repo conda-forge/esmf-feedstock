@@ -74,6 +74,7 @@ elif [[ $mpi == 'nompi' ]]; then
   export ESMF_COMM=mpiuni
 fi
 
+export ESMF_CLINKOPTS="$LDFLAGS"
 if [[ $(uname) == Darwin ]]; then
   export LDFLAGS="-headerpad_max_install_names -Wl,-no_compact_unwind $LDFLAGS"
   export ESMF_F90LINKOPTS="$LDFLAGS -pthread -lc++"
