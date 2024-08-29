@@ -55,6 +55,7 @@ requirements:
     - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
     - cmake
     - gnuconfig
+    - pkg-config
     - netcdf-fortran * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - hdf5 * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
     - libnetcdf * {{ mpi_prefix }}_*  # [build_platform != target_platform and mpi == 'openmpi']
@@ -64,7 +65,6 @@ requirements:
     - {{ compiler('cxx') }}  # [unix]
     - {{ compiler('fortran') }}  # [unix]
     - make  # [unix]
-    - pkg-config  # [unix]
     # Win
     - {{ compiler('m2w64_c') }}  # [win]
     - {{ stdlib("m2w64_c") }}    # [win]
@@ -75,8 +75,6 @@ requirements:
     - m2-make  # [win]
     - m2-sed  # [win]
     - m2-which  # [win]
-    - m2w64-pkg-config  # [win]
-    - m2w64-dlfcn  # [win]
   host:
     # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
