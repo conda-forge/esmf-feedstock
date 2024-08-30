@@ -36,20 +36,20 @@ set "ESMF_OS=MinGW"
 
 make info
 
-@REM make -j%CPU_COUNT%
-@REM make install
-@REM make check
+make -j%CPU_COUNT%
+make install
+make check
 
-@REM sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
+sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
 
-@REM set "ACTIVATE_DIR=%PREFIX%\etc\conda\activate.d"
-@REM set "DEACTIVATE_DIR=%PREFIX%\etc\conda\deactivate.d"
+set "ACTIVATE_DIR=%PREFIX%\etc\conda\activate.d"
+set "DEACTIVATE_DIR=%PREFIX%\etc\conda\deactivate.d"
 
-@REM mkdir %ACTIVATE_DIR%
-@REM mkdir %DEACTIVATE_DIR%
+mkdir %ACTIVATE_DIR%
+mkdir %DEACTIVATE_DIR%
 
-@REM copy %RECIPE_DIR%\scripts\activate.bat %ACTIVATE_DIR%\esmf-activate.bat
-@REM if errorlevel 1 exit 1
+copy %RECIPE_DIR%\scripts\activate.bat %ACTIVATE_DIR%\esmf-activate.bat
+if errorlevel 1 exit 1
 
-@REM copy %RECIPE_DIR%\scripts\deactivate.bat %DEACTIVATE_DIR%\esmf-deactivate.bat
-@REM if errorlevel 1 exit 1
+copy %RECIPE_DIR%\scripts\deactivate.bat %DEACTIVATE_DIR%\esmf-deactivate.bat
+if errorlevel 1 exit 1
