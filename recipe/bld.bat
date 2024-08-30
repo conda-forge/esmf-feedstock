@@ -22,11 +22,11 @@ set "ESMF_CXXCOMPILECPPFLAGS=-D_USE_MATH_DEFINES"
 
 set "ESMF_OS=MinGW"
 
-mingw32-make info
+make info
 
-mingw32-make -j%CPU_COUNT%
-mingw32-make install
-mingw32-make check
+make -j%CPU_COUNT%
+make install
+make check
 
 sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
 
