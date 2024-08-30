@@ -2,6 +2,11 @@ set "cwd=%cd%"
 
 set "LIBRARY_PREFIX=%LIBRARY_PREFIX:\=/%"
 
+set "HOST=x86_64-w64-mingw32"
+set "CC=%HOST%-gcc.exe"
+set "CXX=%HOST%-g++.exe"
+set "FC=%HOST%-gfortran.exe"
+
 set "ESMF_DIR=%cd:\=/%"
 
 bash -lc "echo 'none /tmp usertemp binary,posix=0 0 0' >>/etc/fstab"
