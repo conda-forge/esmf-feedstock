@@ -12,6 +12,8 @@ set "FC=%HOST%-gfortran.exe"
 set "ESMF_F90COMPILER=%FC%"
 set "ESMF_CCOMPILER=%CC%"
 set "ESMF_CXXCOMPILER=%CXX%"
+set "ESMF_AR=%HOST%-gcc-ar.exe"
+set "ESMF_RANLIB=%HOST%-gcc-ranlib.exe"
 set "ESMF_CPP=%CC% -E -P -x c -C -nostdinc"
 
 set "ESMF_DIR=%cd:\=/%"
