@@ -16,6 +16,7 @@ set "ESMF_CLINKER=%CC%"
 set "ESMF_CXXCOMPILER=%CXX%"
 set "ESMF_CXXLINKER=%CXX%"
 set "ESMF_AR=%HOST%-gcc-ar.exe"
+set "ESMF_AREXTRACT=%ESMF_AR% -x"
 set "ESMF_RANLIB=%HOST%-gcc-ranlib.exe"
 set "ESMF_CPP=%CC% -E -P -x c -C -nostdinc"
 
