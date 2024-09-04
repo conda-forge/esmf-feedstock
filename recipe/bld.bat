@@ -42,12 +42,19 @@ set "ESMF_CCOMPILECPPFLAGS=-DNO_TIMES"
 set "ESMF_OS=MinGW"
 
 make info
+if errorlevel 1 exit 1
 
 make -j%CPU_COUNT%
+if errorlevel 1 exit 1
+
 make install
+if errorlevel 1 exit 1
+
 make check
+if errorlevel 1 exit 1
 
 sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
+if errorlevel 1 exit 1
 
 set "ACTIVATE_DIR=%PREFIX%\etc\conda\activate.d"
 set "DEACTIVATE_DIR=%PREFIX%\etc\conda\deactivate.d"
