@@ -29,6 +29,7 @@ source:
     - 0007-Hack-in-windows-naming-conventions.patch
     - windows-exports.patch
     - moab-remove-define-linux.patch  # [win]
+    - deactivate-selected-tests.patch  # [win]
 
 build:
   number: {{ build }}
