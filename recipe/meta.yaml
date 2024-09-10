@@ -1,5 +1,5 @@
 {% set version = "8.6.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -87,7 +87,7 @@ requirements:
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
     - {{ mpi }}  # [mpi != 'nompi']
-    - parallelio >=2.5.9  # [mpi != 'nompi']
+    - parallelio 2.6.3  # [mpi != 'nompi']
   run:
     - netcdf-fortran * {{ mpi_prefix }}_*
     - libnetcdf * {{ mpi_prefix }}_*
