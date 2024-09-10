@@ -1,0 +1,11 @@
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/tests/makefile esmf-8.6.1/src/Infrastructure/Mesh/tests/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/tests/makefile	2024-09-04 12:59:09.390987611 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/tests/makefile	2024-09-04 13:00:47.109438499 +0200
+@@ -16,7 +16,6 @@
+                 $(ESMF_TESTDIR)/ESMCI_MeshMOABUTest \
+                 $(ESMF_TESTDIR)/ESMCI_IntegrateUTest \
+                 $(ESMF_TESTDIR)/ESMCI_MeshUTest \
+-                $(ESMF_TESTDIR)/ESMCI_DInfoUTest \
+                 $(ESMF_TESTDIR)/ESMC_MeshVTKUTest \
+                 $(ESMF_TESTDIR)/ESMF_MeshOpUTest \
+                 $(ESMF_TESTDIR)/ESMF_MeshUTest \

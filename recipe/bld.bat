@@ -1,6 +1,24 @@
+@echo on
+
 set "cwd=%cd%"
 
 set "LIBRARY_PREFIX=%LIBRARY_PREFIX:\=/%"
+
+set "HOST=x86_64-w64-mingw32"
+set "CC=%HOST%-gcc.exe"
+set "CXX=%HOST%-g++.exe"
+set "FC=%HOST%-gfortran.exe"
+
+set "ESMF_F90COMPILER=%FC%"
+set "ESMF_F90LINKER=%FC%"
+set "ESMF_CCOMPILER=%CC%"
+set "ESMF_CLINKER=%CC%"
+set "ESMF_CXXCOMPILER=%CXX%"
+set "ESMF_CXXLINKER=%CXX%"
+set "ESMF_AR=%HOST%-gcc-ar.exe"
+set "ESMF_AREXTRACT=%ESMF_AR% -x"
+set "ESMF_RANLIB=%HOST%-gcc-ranlib.exe"
+set "ESMF_CPP=%CC% -E -P -x c -C -nostdinc"
 
 set "ESMF_DIR=%cd:\=/%"
 
@@ -19,16 +37,24 @@ set "ESMF_NETCDF_INCLUDE=%LIBRARY_PREFIX%/include"
 set "ESMF_NETCDF_LIBPATH=%LIBRARY_PREFIX%/lib"
 
 set "ESMF_CXXCOMPILECPPFLAGS=-D_USE_MATH_DEFINES"
+set "ESMF_CCOMPILECPPFLAGS=-DNO_TIMES"
 
 set "ESMF_OS=MinGW"
 
-mingw32-make info
+make info
+if errorlevel 1 exit 1
 
-mingw32-make -j%CPU_COUNT%
-mingw32-make install
-mingw32-make check
+make -j%CPU_COUNT%
+if errorlevel 1 exit 1
+
+make install
+if errorlevel 1 exit 1
+
+make check
+if errorlevel 1 exit 1
 
 sed -i.bu "s/%BUILD_PREFIX:/=\/%/%LIBRARY_PREFIX:/=\/%/g" %LIBRARY_PREFIX%/lib/esmf.mk && rm %LIBRARY_PREFIX%/lib/esmf.mk.bu
+if errorlevel 1 exit 1
 
 set "ACTIVATE_DIR=%PREFIX%\etc\conda\activate.d"
 set "DEACTIVATE_DIR=%PREFIX%\etc\conda\deactivate.d"

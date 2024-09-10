@@ -1,0 +1,84 @@
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/DiscreteGeometry/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/DiscreteGeometry/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/DiscreteGeometry/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/DiscreteGeometry/makefile	2024-08-30 17:24:10.674585012 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = \
+   DGMSolver.cpp HiReconstruction.cpp
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/IntxMesh/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/IntxMesh/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/IntxMesh/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/IntxMesh/makefile	2024-08-30 17:24:10.673585039 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = \
+   Intx2Mesh.cpp Intx2MeshInPlane.cpp Intx2MeshOnSphere.cpp \
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/io/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/io/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/io/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/io/makefile	2024-08-30 17:24:10.672585066 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = \
+ 	ExoIIUtil.cpp FileTokenizer.cpp GmshUtil.cpp \
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/LocalDiscretization/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/LocalDiscretization/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/LocalDiscretization/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/LocalDiscretization/makefile	2024-08-30 17:24:10.673585039 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = ElemEvaluator.cpp LinearHex.cpp LinearQuad.cpp \
+   LinearTet.cpp LinearTri.cpp QuadraticHex.cpp 
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/makefile	2024-08-30 17:24:10.668585172 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = \
+   AdaptiveKDTree.cpp AEntityFactory.cpp AffineXform.cpp AxisBox.cpp \
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/parallel/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/parallel/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/parallel/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/parallel/makefile	2024-08-30 17:24:10.674585012 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = \
+   gs.cpp ParallelComm.cpp ParallelData.cpp ParallelMergeMesh.cpp \
+diff -ruN esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/verdict/makefile esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/verdict/makefile
+--- esmf-8.6.1.orig/src/Infrastructure/Mesh/src/Moab/verdict/makefile	2024-04-23 23:41:36.000000000 +0200
++++ esmf-8.6.1/src/Infrastructure/Mesh/src/Moab/verdict/makefile	2024-08-30 17:24:10.676584959 +0200
+@@ -3,7 +3,7 @@
+ # leave alone.
+ ALL: build_here 
+ 
+-ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DLINUX -DUSE_MPI
++ESMF_CXXCOMPILECPPFLAGS += -DIS_BUILDING_MB -DHAVE_VSNPRINTF -DUSE_MPI
+ 
+ SOURCEC = V_EdgeMetric.cpp VerdictVector.cpp VerdictWrapper.cpp \
+   V_GaussIntegration.cpp V_HexMetric.cpp V_KnifeMetric.cpp \
