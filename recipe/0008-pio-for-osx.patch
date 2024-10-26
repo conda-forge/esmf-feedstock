@@ -1,0 +1,33 @@
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/IO/PIO/makefile esmf-8.7.0-patch/src/Infrastructure/IO/PIO/makefile
+--- esmf-8.7.0/src/Infrastructure/IO/PIO/makefile	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/IO/PIO/makefile	2024-10-26 15:29:51.138145625 -0600
+@@ -28,8 +28,12 @@
+ ifdef ESMF_NETCDF_INCLUDE
+   ifneq ("$(wildcard $(ESMF_NETCDF_LIBPATH)/libnetcdf.a)","")
+     PIO_CMAKE_OPTS += -DNetCDF_C_INCLUDE_DIR=$(ESMF_NETCDF_INCLUDE) -DNetCDF_C_LIBRARY=$(ESMF_NETCDF_LIBPATH)/libnetcdf.a
+-  else
++  else ifneq ("$(wildcard $(ESMF_NETCDF_LIBPATH)/libnetcdf.so)","")
+     PIO_CMAKE_OPTS += -DNetCDF_C_INCLUDE_DIR=$(ESMF_NETCDF_INCLUDE) -DNetCDF_C_LIBRARY=$(ESMF_NETCDF_LIBPATH)/libnetcdf.so
++  else ifneq ("$(wildcard $(ESMF_NETCDF_LIBPATH)/libnetcdf.dylib)","")
++    PIO_CMAKE_OPTS += -DNetCDF_C_INCLUDE_DIR=$(ESMF_NETCDF_INCLUDE) -DNetCDF_C_LIBRARY=$(ESMF_NETCDF_LIBPATH)/libnetcdf.dylib
++  else
++	$(error NetCDF library libnetcdf.* not found in $(ESMF_NETCDF_LIBPATH))
+   endif
+ else
+   $(error PIO requires NetCDF!!!)
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/IO/PIO/ParallelIO/CMakeLists.txt esmf-8.7.0-patch/src/Infrastructure/IO/PIO/ParallelIO/CMakeLists.txt
+--- esmf-8.7.0/src/Infrastructure/IO/PIO/ParallelIO/CMakeLists.txt	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/IO/PIO/ParallelIO/CMakeLists.txt	2024-10-26 16:02:02.544438056 -0600
+@@ -97,12 +97,6 @@
+ option (WITH_PNETCDF         "Require the use of PnetCDF"                   ON)
+ option (BUILD_SHARED_LIBS    "Build shared libraries"                       OFF)
+
+-if(APPLE)
+-  # The linker on macOS does not include `common symbols` by default
+-  # Passing the -c flag includes them and fixes an error with undefined symbols (err_buffer, resultlen)
+-  set(CMAKE_C_ARCHIVE_FINISH "<CMAKE_RANLIB> -c <TARGET>")
+-endif()
+-
+ # Set a variable that appears in the config.h.in file.
+ if(PIO_USE_PNETCDF_VARD)
+   set(USE_VARD 1)
