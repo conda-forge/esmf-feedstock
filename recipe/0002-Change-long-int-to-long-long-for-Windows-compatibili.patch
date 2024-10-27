@@ -1,22 +1,7 @@
-From 78a6017b1b105fc7940d4d8c26c118b6553d1177 Mon Sep 17 00:00:00 2001
-From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
-Date: Fri, 3 Feb 2023 10:29:05 +0100
-Subject: [PATCH 2/7] Change `long int` to `long long` for Windows
- compatibility
-
----
- .../Base/interface/ESMF_InfoCDef.F90          |   8 +-
- .../Base/interface/ESMF_InfoCDefGeneric.F90   |   8 +-
- src/Infrastructure/Base/src/ESMCI_Info.C      |   3 +
- .../Base/src/ESMC_InfoCDefGeneric.C           |  16 +-
- src/Infrastructure/stubs/mpiuni/mpi.h         | 432 +++++++++---------
- 5 files changed, 235 insertions(+), 232 deletions(-)
-
-diff --git a/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90 b/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
-index c09c884595..6d2c236f22 100644
---- a/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
-+++ b/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
-@@ -3,7 +3,7 @@ interface
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90 esmf-8.7.0-patch/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90
+--- esmf-8.7.0/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/Base/interface/ESMF_InfoCDef.F90	2024-10-26 10:43:33.765167828 -0600
+@@ -3,7 +3,7 @@
    function c_info_base_get(base_address) bind(C, name="ESMC_BaseGetInfo")
      use iso_c_binding
      implicit none
@@ -25,7 +10,7 @@ index c09c884595..6d2c236f22 100644
      type(C_PTR) :: c_info_base_get
    end function c_info_base_get
  
-@@ -66,8 +66,8 @@ interface
+@@ -66,8 +66,8 @@
    subroutine c_info_copyforattribute_reference(src_base_address, dst_base_address, rc) bind(C, name="ESMC_InfoCopyForAttributeReference")
      use iso_c_binding
      implicit none
@@ -36,7 +21,7 @@ index c09c884595..6d2c236f22 100644
      integer(C_INT), intent(out) :: rc
    end subroutine
    
-@@ -205,7 +205,7 @@ interface
+@@ -205,7 +205,7 @@
      implicit none
      type(C_PTR), value :: inqstate
      integer(C_INT), intent(in) :: rootPet
@@ -45,11 +30,10 @@ index c09c884595..6d2c236f22 100644
      integer(C_INT), intent(in) :: markClean
      integer(C_INT), intent(out) :: rc
    end subroutine
-diff --git a/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90 b/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90
-index 41f831287e..1beb4d21de 100644
---- a/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90
-+++ b/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90
-@@ -62,7 +62,7 @@ interface
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90 esmf-8.7.0-patch/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90
+--- esmf-8.7.0/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/Base/interface/ESMF_InfoCDefGeneric.F90	2024-10-26 10:43:33.765167828 -0600
+@@ -62,7 +62,7 @@
      implicit none
      type(C_PTR), value :: info
      character(C_CHAR), intent(in) :: key(*)
@@ -58,7 +42,7 @@ index 41f831287e..1beb4d21de 100644
      integer(C_INT), intent(inout) :: rc
      type(C_PTR), value :: default, idx
      integer(C_INT), intent(in) :: recursive
-@@ -123,7 +123,7 @@ interface
+@@ -123,7 +123,7 @@
      implicit none
      type(C_PTR), value :: info
      character(C_CHAR), intent(in) :: key(*)
@@ -67,7 +51,7 @@ index 41f831287e..1beb4d21de 100644
      integer(C_INT), intent(out) :: itemcount
      integer(C_INT), intent(inout) :: rc
      integer(C_INT), intent(in) :: recursive
-@@ -189,7 +189,7 @@ interface
+@@ -189,7 +189,7 @@
      implicit none
      type(C_PTR), value :: info
      character(kind=C_CHAR), intent(in) :: key(*)
@@ -76,7 +60,7 @@ index 41f831287e..1beb4d21de 100644
      logical(C_BOOL), intent(in) :: force
      integer(C_INT), intent(inout) :: rc
      type(C_PTR), value :: idx
-@@ -261,7 +261,7 @@ interface
+@@ -261,7 +261,7 @@
      implicit none
      type(C_PTR), value :: info
      character(kind=C_CHAR), intent(in) :: key(*)
@@ -85,11 +69,10 @@ index 41f831287e..1beb4d21de 100644
      integer(C_INT), intent(in) :: itemcount
      logical(C_BOOL), intent(in) :: force
      integer(C_INT), intent(inout) :: rc
-diff --git a/src/Infrastructure/Base/src/ESMCI_Info.C b/src/Infrastructure/Base/src/ESMCI_Info.C
-index 7ccdcf8cee..a5e0b9b8d1 100644
---- a/src/Infrastructure/Base/src/ESMCI_Info.C
-+++ b/src/Infrastructure/Base/src/ESMCI_Info.C
-@@ -840,6 +840,7 @@ template float Info::get(key_t&, const float*, const int*, bool, std::string*, b
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/Base/src/ESMCI_Info.C esmf-8.7.0-patch/src/Infrastructure/Base/src/ESMCI_Info.C
+--- esmf-8.7.0/src/Infrastructure/Base/src/ESMCI_Info.C	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/Base/src/ESMCI_Info.C	2024-10-26 10:43:33.766167832 -0600
+@@ -840,6 +840,7 @@
  template double Info::get(key_t&, const double*, const int*, bool, std::string*, bool) const;
  template int Info::get(key_t&, const int*, const int*, bool, std::string*, bool) const;
  template long int Info::get(key_t&, const long int*, const int*, bool, std::string*, bool) const;
@@ -97,7 +80,7 @@ index 7ccdcf8cee..a5e0b9b8d1 100644
  template bool Info::get(key_t&, const bool*, const int*, bool, std::string*, bool) const;
  template std::string Info::get(key_t&, const std::string*, const int*, bool, std::string*, bool) const;
  template json Info::get(key_t&, const json*, const int*, bool, std::string*, bool) const;
-@@ -1389,6 +1390,7 @@ template void Info::set<float>(key_t&, float, bool, const int*, const key_t * co
+@@ -1389,6 +1390,7 @@
  template void Info::set<double>(key_t&, double, bool, const int*, const key_t * const);
  template void Info::set<int>(key_t&, int, bool, const int*, const key_t * const);
  template void Info::set<long int>(key_t&, long int, bool, const int*, const key_t * const);
@@ -105,7 +88,7 @@ index 7ccdcf8cee..a5e0b9b8d1 100644
  template void Info::set<std::string>(key_t&, std::string, bool, const int*, const key_t * const);
  template void Info::set<bool>(key_t&, bool, bool, const int*, const key_t * const);
  
-@@ -1421,6 +1423,7 @@ template void Info::set<float>(key_t&, float*, int, bool, const key_t * const);
+@@ -1421,6 +1423,7 @@
  template void Info::set<double>(key_t&, double*, int, bool, const key_t * const);
  template void Info::set<int>(key_t&, int*, int, bool, const key_t * const);
  template void Info::set<long int>(key_t&, long int*, int, bool, const key_t * const);
@@ -113,11 +96,10 @@ index 7ccdcf8cee..a5e0b9b8d1 100644
  template void Info::set<bool>(key_t&, bool*, int, bool, const key_t * const);
  template void Info::set<std::vector<std::string>>(key_t&, std::vector<std::string>*, int, bool, const key_t * const);
  
-diff --git a/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C b/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
-index 437553a364..b94ff66d33 100644
---- a/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
-+++ b/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
-@@ -102,13 +102,13 @@ void ESMC_InfoGetI4(ESMCI::Info *info, char *key, int &value, int &esmc_rc, int
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C esmf-8.7.0-patch/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C
+--- esmf-8.7.0/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/Base/src/ESMC_InfoCDefGeneric.C	2024-10-26 10:43:33.766167832 -0600
+@@ -102,13 +102,13 @@
  
  #undef  ESMC_METHOD
  #define ESMC_METHOD "ESMC_InfoGetI8()"
@@ -133,7 +115,7 @@ index 437553a364..b94ff66d33 100644
      esmc_rc = ESMF_SUCCESS;
    }
    ESMC_CATCH_ISOC
-@@ -253,7 +253,7 @@ void ESMC_InfoGetArrayI4(ESMCI::Info *info, char *key, int *value, int &count, i
+@@ -253,7 +253,7 @@
  
  #undef  ESMC_METHOD
  #define ESMC_METHOD "ESMC_InfoGetArrayI8()"
@@ -142,7 +124,7 @@ index 437553a364..b94ff66d33 100644
    ESMC_CHECK_INIT(info, esmc_rc)
    esmc_rc = ESMF_FAILURE;
    try {
-@@ -285,7 +285,7 @@ void ESMC_InfoGetArrayI8(ESMCI::Info *info, char *key, long int *value, int &cou
+@@ -285,7 +285,7 @@
          ESMC_CATCH_ERRPASSTHRU
        }
      } else {
@@ -151,7 +133,7 @@ index 437553a364..b94ff66d33 100644
      }
      esmc_rc = ESMF_SUCCESS;
    }
-@@ -389,7 +389,7 @@ void ESMC_InfoSetI4(ESMCI::Info *info, char *key, int &value, bool &force, int &
+@@ -389,7 +389,7 @@
  
  #undef  ESMC_METHOD
  #define ESMC_METHOD "ESMC_InfoSetI8()"
@@ -160,7 +142,7 @@ index 437553a364..b94ff66d33 100644
    ESMC_CHECK_INIT(info, esmc_rc)
    esmc_rc = ESMF_FAILURE;
    try {
-@@ -397,7 +397,7 @@ void ESMC_InfoSetI8(ESMCI::Info *info, char *key, long int &value, bool &force,
+@@ -397,7 +397,7 @@
      std::string local_pkey(pkey);
      std::string *local_pkeyp = nullptr;
      if (local_pkey.size() != 0) {local_pkeyp = &local_pkey;}
@@ -169,7 +151,7 @@ index 437553a364..b94ff66d33 100644
      esmc_rc = ESMF_SUCCESS;
    }
    ESMC_CATCH_ISOC
-@@ -471,7 +471,7 @@ void ESMC_InfoSetArrayI4(ESMCI::Info *info, char *key, int *value, int &count, b
+@@ -471,7 +471,7 @@
  
  #undef  ESMC_METHOD
  #define ESMC_METHOD "ESMC_InfoSetArrayI8()"
@@ -178,7 +160,7 @@ index 437553a364..b94ff66d33 100644
    ESMC_CHECK_INIT(info, esmc_rc)
    esmc_rc = ESMF_FAILURE;
    try {
-@@ -479,7 +479,7 @@ void ESMC_InfoSetArrayI8(ESMCI::Info *info, char *key, long int *value, int &cou
+@@ -479,7 +479,7 @@
      std::string local_pkey(pkey);
      std::string *local_pkeyp = nullptr;
      if (local_pkey.size() != 0) {local_pkeyp = &local_pkey;}
@@ -187,11 +169,10 @@ index 437553a364..b94ff66d33 100644
      esmc_rc = ESMF_SUCCESS;
    }
    ESMC_CATCH_ISOC
-diff --git a/src/Infrastructure/stubs/mpiuni/mpi.h b/src/Infrastructure/stubs/mpiuni/mpi.h
-index 1f819244dd..58210d11cc 100644
---- a/src/Infrastructure/stubs/mpiuni/mpi.h
-+++ b/src/Infrastructure/stubs/mpiuni/mpi.h
-@@ -146,7 +146,7 @@ extern int MPIUNI_Memcpy(void*,const void*,int);
+diff -ruN --no-dereference esmf-8.7.0/src/Infrastructure/stubs/mpiuni/mpi.h esmf-8.7.0-patch/src/Infrastructure/stubs/mpiuni/mpi.h
+--- esmf-8.7.0/src/Infrastructure/stubs/mpiuni/mpi.h	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/src/Infrastructure/stubs/mpiuni/mpi.h	2024-10-26 10:47:32.372095459 -0600
+@@ -160,7 +160,7 @@
  #define MPI_UNDEFINED    678
  #define MPI_MAX_PROCESSOR_NAME 512
  #define MPI_MAX_ERROR_STRING 512
@@ -200,7 +181,7 @@ index 1f819244dd..58210d11cc 100644
  
  /* for moab to build in mpiuni mode */
  #define MPI_Fint  int
-@@ -218,240 +218,240 @@ extern double ESMC_MPI_Wtime(void);
+@@ -246,240 +246,240 @@
  */
  
  #define MPI_Init(argc,argv) \
@@ -602,7 +583,7 @@ index 1f819244dd..58210d11cc 100644
       MPI_SUCCESS)
       /* Need to determine sizeof "sendtype" */
  #define MPI_Sendrecv(sendbuf,sendcount, sendtype,\
-@@ -475,7 +475,7 @@ extern double ESMC_MPI_Wtime(void);
+@@ -502,14 +502,14 @@
       array_of_displacements,\
       array_of_types, newtype) MPI_SUCCESS
  #define MPI_Address(location,address) \
@@ -610,8 +591,7 @@ index 1f819244dd..58210d11cc 100644
 +     (*(address) = (MPI_Aint)(char *)(location),MPI_SUCCESS)
  #define MPI_Type_extent(datatype,extent) \
       MPI_Abort(MPI_COMM_WORLD,0)
- #define MPI_Type_size(datatype,size) \
-@@ -484,7 +484,7 @@ extern double ESMC_MPI_Wtime(void);
+ #define MPI_Type_lb(datatype,displacement) \
       MPI_Abort(MPI_COMM_WORLD,0)
  #define MPI_Type_ub(datatype,displacement) \
       MPI_Abort(MPI_COMM_WORLD,0)
@@ -620,7 +600,7 @@ index 1f819244dd..58210d11cc 100644
       MPI_SUCCESS)
  #define MPI_Type_free(datatype) MPI_SUCCESS
  #define MPI_Get_elements(status, datatype,count) \
-@@ -498,69 +498,69 @@ extern double ESMC_MPI_Wtime(void);
+@@ -523,57 +523,57 @@
  #define MPI_Pack_size(incount, datatype,comm,size) \
       MPI_Abort(MPI_COMM_WORLD,0)
  #define MPI_Barrier(comm) \
@@ -648,7 +628,7 @@ index 1f819244dd..58210d11cc 100644
 +     MPIUNI_TMP = (void*)(MPI_Aint) (root),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),\
-      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype)),\
+      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype),CHECK_FOR_MPI_IN_PLACE_SOURCE),  \
       MPI_SUCCESS)
  #define MPI_Gatherv(sendbuf,sendcount, sendtype,\
       recvbuf,recvcounts,displs,\
@@ -663,7 +643,7 @@ index 1f819244dd..58210d11cc 100644
 +     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (root),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),\
-      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype)),\
+      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype),CHECK_FOR_MPI_IN_PLACE_SOURCE),  \
       MPI_SUCCESS)
  #define MPI_Scatter(sendbuf,sendcount, sendtype,\
       recvbuf,recvcount, recvtype,\
@@ -684,27 +664,6 @@ index 1f819244dd..58210d11cc 100644
 +     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (root),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),MPI_Abort(MPI_COMM_WORLD,0))
- #define MPI_Scatterv(sendbuf,sendcounts,displs,\
-      sendtype, recvbuf,recvcount,\
-      recvtype,root,comm) \
--     (MPIUNI_TMP = (void*)(long) (sendbuf),\
--     MPIUNI_TMP = (void*)(long) (sendcounts),\
--     MPIUNI_TMP = (void*)(long) (displs),\
--     MPIUNI_TMP = (void*)(long) (sendtype),\
--     MPIUNI_TMP = (void*)(long) (recvbuf),\
--     MPIUNI_TMP = (void*)(long) (recvcount),\
--     MPIUNI_TMP = (void*)(long) (recvtype),\
--     MPIUNI_TMP = (void*)(long) (root),\
--     MPIUNI_TMP = (void*)(long) (comm),MPI_Abort(MPI_COMM_WORLD,0))
-+     (MPIUNI_TMP = (void*)(MPI_Aint) (sendbuf),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (sendcounts),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (displs),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (sendtype),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (recvbuf),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (recvcount),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (root),\
-+     MPIUNI_TMP = (void*)(MPI_Aint) (comm),MPI_Abort(MPI_COMM_WORLD,0))
  #define MPI_Allgather(sendbuf,sendcount, sendtype,\
       recvbuf,recvcount, recvtype,comm) \
 -     (MPIUNI_TMP = (void*)(long) (recvcount),\
@@ -713,7 +672,7 @@ index 1f819244dd..58210d11cc 100644
 +     (MPIUNI_TMP = (void*)(MPI_Aint) (recvcount),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),\
-      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype)),\
+      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype),CHECK_FOR_MPI_IN_PLACE_SOURCE),  \
       MPI_SUCCESS)
  #define MPI_Allgatherv(sendbuf,sendcount, sendtype,\
       recvbuf,recvcounts,displs,recvtype,comm) \
@@ -725,27 +684,27 @@ index 1f819244dd..58210d11cc 100644
 +     MPIUNI_TMP = (void*)(MPI_Aint) (displs),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (recvtype),\
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),\
-      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype)),\
+      MPIUNI_Memcpy(recvbuf,sendbuf,(sendcount)* (sendtype),CHECK_FOR_MPI_IN_PLACE_SOURCE),  \
       MPI_SUCCESS)
  #define MPI_Alltoall(sendbuf,sendcount, sendtype,\
-@@ -572,13 +572,13 @@ extern double ESMC_MPI_Wtime(void);
+@@ -585,13 +585,13 @@
  #define MPI_Reduce(sendbuf, recvbuf,count,\
       datatype,op,root,comm) \
-      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype)),\
+      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype),CHECK_FOR_MPI_IN_PLACE_SOURCE), \
 -     MPIUNI_TMP = (void*)(long) (comm),MPI_SUCCESS)
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),MPI_SUCCESS)
  #define MPI_Allreduce(sendbuf, recvbuf,count,datatype,op,comm) \
-      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype)),\
+      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype),CHECK_FOR_MPI_IN_PLACE_SOURCE), \
 -     MPIUNI_TMP = (void*)(long) (comm),MPI_SUCCESS)
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),MPI_SUCCESS)
  #define MPI_Scan(sendbuf, recvbuf,count,datatype,op,comm) \
-      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype)),\
+      (MPIUNI_Memcpy(recvbuf,sendbuf,(count)*(datatype),CHECK_FOR_MPI_IN_PLACE_SOURCE), \
 -     MPIUNI_TMP = (void*)(long) (comm),MPI_SUCCESS)
 +     MPIUNI_TMP = (void*)(MPI_Aint) (comm),MPI_SUCCESS)
  #define MPI_Reduce_scatter(sendbuf, recvbuf,recvcounts,\
       datatype,op,comm) \
       MPI_Abort(MPI_COMM_WORLD,0)
-@@ -595,28 +595,28 @@ extern double ESMC_MPI_Wtime(void);
+@@ -608,28 +608,28 @@
  #define MPI_Group_range_incl(group,n,ranges,newgroup) MPI_SUCCESS
  #define MPI_Group_range_excl(group,n,ranges,newgroup) MPI_SUCCESS
  #define MPI_Group_free(group) \
@@ -781,9 +740,26 @@ index 1f819244dd..58210d11cc 100644
       MPI_SUCCESS)
  #define MPI_Comm_split(comm,color,key,newcomm) MPI_SUCCESS
  #define MPI_Comm_test_inter(comm,flag) (*(flag)=1,MPI_SUCCESS)
-@@ -651,16 +651,16 @@ extern double ESMC_MPI_Wtime(void);
+@@ -640,12 +640,12 @@
+ #define MPI_Intercomm_merge(intercomm,high,newintracomm) MPI_SUCCESS
+ 
+ #define MPI_Info_create(info) \
+-  (MPIUNI_TMP = (void*)(long) (info),\
++  (MPIUNI_TMP = (void*)(MPI_Aint) (info),\
+    MPI_SUCCESS)
+ #define MPI_Info_set(info,key,value) \
+-  (MPIUNI_TMP = (void*)(long) (info),\
+-   MPIUNI_TMP = (void*)(long) (key),\
+-   MPIUNI_TMP = (void*)(long) (value),\
++  (MPIUNI_TMP = (void*)(MPI_Aint) (info),\
++   MPIUNI_TMP = (void*)(MPI_Aint) (key),\
++   MPIUNI_TMP = (void*)(MPI_Aint) (value),\
+    MPI_SUCCESS)
+ 
+ #define MPI_Topo_test(comm,status) MPI_SUCCESS
+@@ -673,16 +673,16 @@
  #define MPI_Get_processor_name(name,result_len) \
-      (MPIUNI_Memcpy(name,"localhost",9*sizeof(char)),name[10] = 0,*(result_len) = 10)
+      (MPIUNI_Memcpy(name,"localhost",9*sizeof(char),CHECK_FOR_MPI_IN_PLACE_NONE),name[10] = 0,*(result_len) = 10)
  #define MPI_Errhandler_create(function,errhandler) \
 -     (MPIUNI_TMP = (void*)(long) (errhandler),\
 +     (MPIUNI_TMP = (void*)(MPI_Aint) (errhandler),\
@@ -802,6 +778,3 @@ index 1f819244dd..58210d11cc 100644
     string[0]='\0', \
     *result_len=0, \
     MPI_SUCCESS)
--- 
-2.39.1
-

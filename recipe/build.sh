@@ -64,7 +64,7 @@ else
 fi
 
 if [[ $mpi == 'mpich' ]]; then
-  export ESMF_COMM=mpich3
+  export ESMF_COMM=mpich
 elif [[ $mpi == 'openmpi' ]]; then
   export ESMF_COMM=openmpi
   export ESMF_MPIRUN="mpirun --oversubscribe"

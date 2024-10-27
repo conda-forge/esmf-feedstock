@@ -1,18 +1,9 @@
-From c2aa58965016986b3c0c812f3048be38b0c6a2fc Mon Sep 17 00:00:00 2001
-From: Klaus Zimmermann <klaus.zimmermann@smhi.se>
-Date: Fri, 3 Feb 2023 13:22:24 +0100
-Subject: [PATCH 6/7] Make pathtype recognize Windows style absolute paths
-
----
- scripts/pathtype | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/scripts/pathtype b/scripts/pathtype
-index 588b008ca1..c297811699 100755
---- a/scripts/pathtype
-+++ b/scripts/pathtype
-@@ -1,8 +1,9 @@
- #!/bin/sh
+diff -ruN --no-dereference esmf-8.7.0/scripts/pathtype esmf-8.7.0-patch/scripts/pathtype
+--- esmf-8.7.0/scripts/pathtype	2024-10-03 21:21:21.000000000 -0600
++++ esmf-8.7.0-patch/scripts/pathtype	2024-10-26 11:50:13.260479971 -0600
+@@ -1,8 +1,10 @@
+-#!/bin/sh
++#!/bin/bash
  # return "abs" if input path absolute and "rel" if input path relative
  firstchar=`echo $1 | awk '{ print substr($0,1,1) }'`
 -if ([ $firstchar = "/" ]); then
@@ -24,6 +15,4 @@ index 588b008ca1..c297811699 100755
 -echo "rel"
 +    echo "rel"
  fi
--- 
-2.39.1
-
++
