@@ -17,9 +17,8 @@ source:
   url: https://github.com/esmf-org/esmf/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 586e0101d76ff9842d9ad43567fae50317ee794d80293430d9f1847dec0eefa5
   patches:
-    # remove these very long running tests only for aarch64 nompi (which is
-    # hanging) and osx64 mpich (which is timing out)
-    - 0001-remove-long-running-tests.patch  # [(aarch64 and mpi == 'nompi') or (osx and mpi == 'mpich')]
+    # remove these very long running tests only for aarch64 nompi (which is hanging)
+    - 0001-remove-long-running-tests-aarch64.patch  # [aarch64 and mpi == 'nompi']
     # Sequence of Windows targeting patches; should be unix compatible
     - 0002-Add-x86_64-machine-id-for-MinGW.gfortran.patch
     - 0003-Change-long-int-to-long-long-for-Windows-compatibili.patch
@@ -30,6 +29,8 @@ source:
     - 0008-Hack-in-windows-naming-conventions.patch
     - 0009-pio-for-osx.patch
     - 0010-windows-exports.patch
+    # remove a different set of very long running tests only for osx and mpich (also hanging)
+    - 0011-remove-long-running-tests-osx-mpich.patch  # [osx and mpi == 'mpich']
 
 build:
   number: {{ build }}
