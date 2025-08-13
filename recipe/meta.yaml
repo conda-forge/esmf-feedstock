@@ -19,7 +19,7 @@ source:
   patches:
     # remove these very long running tests only for aarch64 nompi (which is
     # hanging) and osx64 mpich (which is timing out)
-    - 0001-remove-long-running-tests.patch  # [(aarch64 and mpi == 'nompi') or (osx64 and mpi == 'mpich')]
+    - 0001-remove-long-running-tests.patch  # [(aarch64 and mpi == 'nompi') or (osx and mpi == 'mpich')]
     # Sequence of Windows targeting patches; should be unix compatible
     - 0002-Add-x86_64-machine-id-for-MinGW.gfortran.patch
     - 0003-Change-long-int-to-long-long-for-Windows-compatibili.patch
