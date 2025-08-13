@@ -1,5 +1,5 @@
-{% set version = "8.8.1" %}
-{% set build = 1 %}
+{% set version = "8.9.0" %}
+{% set build = 0 %}
 
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
@@ -15,20 +15,21 @@ package:
 
 source:
   url: https://github.com/esmf-org/esmf/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: b0acb59d4f000bfbdfddc121a24819bd2a50997c7b257b0db2ceb96f3111b173
+  sha256: 586e0101d76ff9842d9ad43567fae50317ee794d80293430d9f1847dec0eefa5
   patches:
-    # remove these very long running tests only for aarch64 nompi (which is hanging)
-    - remove-long-running-tests.patch  # [aarch64 and mpi == 'nompi']
+    # remove these very long running tests only for aarch64 nompi (which is
+    # hanging) and osx64 mpich (which is timing out)
+    - 0001-remove-long-running-tests.patch  # [(aarch64 and mpi == 'nompi') or (osx and mpi == 'mpich')]
     # Sequence of Windows targeting patches; should be unix compatible
-    - 0001-Add-x86_64-machine-id-for-MinGW.gfortran.patch
-    - 0002-Change-long-int-to-long-long-for-Windows-compatibili.patch
-    - 0003-Deal-with-command-line-length-limitations.patch
-    - 0004-Deactivate-ESMF_NETCDF-way-of-specifying-nc-config.patch
-    - 0005-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
-    - 0006-Make-pathtype-recognize-Windows-style-absolute-paths.patch
-    - 0007-Hack-in-windows-naming-conventions.patch
-    - 0008-pio-for-osx.patch
-    - windows-exports.patch
+    - 0002-Add-x86_64-machine-id-for-MinGW.gfortran.patch
+    - 0003-Change-long-int-to-long-long-for-Windows-compatibili.patch
+    - 0004-Deal-with-command-line-length-limitations.patch
+    - 0005-Deactivate-ESMF_NETCDF-way-of-specifying-nc-config.patch
+    - 0006-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
+    - 0007-Make-pathtype-recognize-Windows-style-absolute-paths.patch
+    - 0008-Hack-in-windows-naming-conventions.patch
+    - 0009-pio-for-osx.patch
+    - 0010-windows-exports.patch
 
 build:
   number: {{ build }}
