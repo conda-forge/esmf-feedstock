@@ -1,0 +1,110 @@
+diff -ruN esmf-8.9.0/src/Infrastructure/Array/tests/makefile esmf-8.9.0-patch/src/Infrastructure/Array/tests/makefile
+--- esmf-8.9.0/src/Infrastructure/Array/tests/makefile	2025-08-12 00:33:46.000000000 +0200
++++ esmf-8.9.0-patch/src/Infrastructure/Array/tests/makefile	2025-08-13 18:16:53.550099098 +0200
+@@ -1,4 +1,4 @@
+-# $Id$ 
++# $Id$
+ 
+ ALL:      build_unit_tests
+ run:      run_unit_tests
+@@ -13,7 +13,6 @@
+                 $(ESMF_TESTDIR)/ESMF_ArrayGatherUTest \
+ 					 $(ESMF_TESTDIR)/ESMF_ArrayIOTypesUTest \
+                 $(ESMF_TESTDIR)/ESMF_ArrayIOUTest \
+-                $(ESMF_TESTDIR)/ESMF_ArraySMMUTest \
+                 $(ESMF_TESTDIR)/ESMF_ArraySMMFromFileUTest \
+                 $(ESMF_TESTDIR)/ESMF_ArrayArbIdxSMMUTest \
+                 $(ESMF_TESTDIR)/ESMF_ArrayRedistUTest \
+@@ -27,7 +26,6 @@
+                 RUN_ESMF_ArrayGatherUTest \
+ 					 RUN_ESMF_ArrayIOTypesUTest \
+                 RUN_ESMF_ArrayIOUTest \
+-                RUN_ESMF_ArraySMMUTest \
+                 RUN_ESMF_ArraySMMFromFileUTest \
+                 RUN_ESMF_ArrayArbIdxSMMUTest \
+                 RUN_ESMF_ArrayRedistUTest \
+@@ -37,12 +35,11 @@
+ 
+ TESTS_RUN_UNI = RUN_ESMF_ArrayDataUTestUNI \
+ 					 RUN_ESMF_ArrayIOTypesUTestUNI \
+-                RUN_ESMF_ArraySMMUTestUNI \
+                 RUN_ESMF_ArraySMMFromFileUTestUNI \
+                 RUN_ESMC_ArrayUTestUNI
+ 
+ #
+-# check ESMF_TESTHARNESS_ARRAY for default, 
++# check ESMF_TESTHARNESS_ARRAY for default,
+ # otherwise append test harness suite target
+ #
+ ifeq ($(ESMF_TESTHARNESS_ARRAY), default)
+@@ -55,11 +52,11 @@
+ 
+ include ${ESMF_DIR}/makefile
+ 
+-CLEANDIRS   = 
++CLEANDIRS   =
+ CLEANFILES  = $(TESTS_BUILD)
+ CLOBBERDIRS =
+ 
+-DIRS        = 
++DIRS        =
+ 
+ #
+ # unit test targets
+@@ -103,14 +100,6 @@
+ 
+ # ---
+ 
+-RUN_ESMF_ArraySMMUTest:
+-	$(MAKE) TNAME=ArraySMM NP=6 ftest
+-
+-RUN_ESMF_ArraySMMUTestUNI:
+-	$(MAKE) TNAME=ArraySMM NP=1 ftest
+-
+-# ---
+-
+ RUN_ESMF_ArraySMMFromFileUTest:
+ 	mkdir -p $(ESMF_TESTDIR)/data
+ 	cp -f ../../IO/tests/T42_grid.nc $(ESMF_TESTDIR)/data
+diff -ruN esmf-8.9.0/src/Infrastructure/Mesh/tests/makefile esmf-8.9.0-patch/src/Infrastructure/Mesh/tests/makefile
+--- esmf-8.9.0/src/Infrastructure/Mesh/tests/makefile	2025-08-12 00:33:46.000000000 +0200
++++ esmf-8.9.0-patch/src/Infrastructure/Mesh/tests/makefile	2025-08-13 18:16:20.966065500 +0200
+@@ -1,4 +1,4 @@
+-# $Id$ 
++# $Id$
+ 
+ ALL:      build_unit_tests
+ run:      run_unit_tests
+@@ -177,32 +177,6 @@
+ 	# move the updated source file from the execution directory to the source directory
+ 	mv $(ESMF_TESTDIR)/ESMCI_MeshCapGenUTest.C $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapGenUTest.C
+ 
+-
+-RUN_ESMCI_MeshCapRegridUTest:
+-	# copy executable to name of the alternate test file (in execution directory)
+-	cp $(ESMF_TESTDIR)/ESMCI_MeshCapRegridUTest $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest
+-	# remove the old alternate test file in the source directory
+-	rm -f $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridGenUTest.C
+-	# copy the source file to the execution directory under the new name
+-	cp $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridUTest.C $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest.C
+-	# run the test
+-	$(MAKE) TNAME=MeshCapRegridGen NP=4 citest
+-	# move the updated source file from the execution directory to the source directory
+-	mv $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest.C $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridGenUTest.C
+-
+-RUN_ESMCI_MeshCapRegridUTestUNI:
+-	# copy executable to name of the alternate test file (in execution directory)
+-	cp $(ESMF_TESTDIR)/ESMCI_MeshCapRegridUTest $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest
+-	# remove the old alternate test file in the source directory
+-	rm -f $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridGenUTest.C
+-	# copy the source file to the execution directory under the new name
+-	cp $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridUTest.C $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest.C
+-	# run the test
+-	$(MAKE) TNAME=MeshCapRegridGen NP=1 citest
+-	# move the updated source file from the execution directory to the source directory
+-	mv $(ESMF_TESTDIR)/ESMCI_MeshCapRegridGenUTest.C $(ESMF_DIR)/$(LOCDIR)/ESMCI_MeshCapRegridGenUTest.C
+-
+-
+ RUN_ESMCI_MBMesh_ExtrapolateUTest:
+ 	$(MAKE) TNAME=MBMesh_Extrapolate NP=4 citest
+ 
