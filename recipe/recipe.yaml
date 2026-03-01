@@ -96,7 +96,7 @@ requirements:
     - if: mpi != "nompi"
       then:
         - ${{ mpi }}
-        - parallelio 2.6.7
+        - parallelio 2.6.9.*
   run:
     - netcdf-fortran * ${{ mpi_prefix }}_*
     - libnetcdf * ${{ mpi_prefix }}_*
