@@ -1,0 +1,138 @@
+schema_version: 1
+
+context:
+  version: "8.9.1"
+  build: 1
+  mpi: ${{ mpi or "nompi" }}
+  build_number: ${{ build + 100 if mpi == "mpich" else build }}
+  mpi_prefix: ${{ "mpi_" + mpi if mpi != "nompi" else "nompi" }}
+
+package:
+  name: esmf
+  version: ${{ version }}
+
+source:
+  url: https://github.com/esmf-org/esmf/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: e3fafd0c057bf1c3b4c41c997b392016d621b1f1a7c601355c325a7f58425d78
+  patches:
+    # remove these very long running tests only for aarch64 nompi (which is hanging)
+    - if: aarch64 and mpi == "nompi"
+      then:
+        - 0001-remove-long-running-tests-aarch64.patch
+    # Sequence of Windows targeting patches; should be unix compatible
+    - 0002-Add-x86_64-machine-id-for-MinGW.gfortran.patch
+    - 0003-Change-long-int-to-long-long-for-Windows-compatibili.patch
+    - 0004-Deal-with-command-line-length-limitations.patch
+    - 0005-Deactivate-ESMF_NETCDF-way-of-specifying-nc-config.patch
+    - 0006-Replace-flaky-abspath-script-with-make-s-abspath-fun.patch
+    - 0007-Make-pathtype-recognize-Windows-style-absolute-paths.patch
+    - 0008-Hack-in-windows-naming-conventions.patch
+    - 0009-pio-for-osx.patch
+    - 0010-windows-exports.patch
+    # remove a different set of very long running tests only for osx and mpich (also hanging)
+    - if: osx and mpi == "mpich"
+      then:
+        - 0011-remove-long-running-tests-osx-mpich.patch
+
+build:
+  number: ${{ build_number }}
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `esmf * mpi_mpich_*` for mpich
+  # `esmf * mpi_*` for any mpi
+  # `esmf * nompi_*` for no mpi
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build_number }}
+
+  # There is a compiler error in the current Windows version of gcc, see
+  # https://github.com/conda-forge/esmf-feedstock/pull/109#issuecomment-1795477835
+  skip:
+    - win
+
+requirements:
+  build:
+    # General
+    - perl
+    - cmake
+    - gnuconfig
+    - if: mpi == "openmpi" and build_platform != target_platform
+      then:
+        - ${{ mpi }}
+        - netcdf-fortran * ${{ mpi_prefix }}_*
+        - hdf5 * ${{ mpi_prefix }}_*
+        - libnetcdf * ${{ mpi_prefix }}_*
+    # Unix
+    - if: unix
+      then:
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
+        - ${{ compiler("fortran") }}
+        - make
+        - pkg-config
+    # Win
+    - if: win
+      then:
+        - ${{ compiler("m2w64_c") }}
+        - ${{ stdlib("m2w64_c") }}
+        - ${{ compiler("m2w64_cxx") }}
+        - ${{ compiler("m2w64_fortran") }}
+        - m2-autoconf
+        - m2-grep
+        - m2-make
+        - m2-sed
+        - m2-which
+        - m2w64-pkg-config
+        - m2w64-dlfcn
+  host:
+    # need to list netcdf-fortran, hdf5 and libnetcdf twice to get version
+    # pinning from variants and build pinning from ${{ mpi_prefix }}
+    - netcdf-fortran
+    - netcdf-fortran * ${{ mpi_prefix }}_*
+    - libnetcdf
+    - libnetcdf * ${{ mpi_prefix }}_*
+    - hdf5
+    - hdf5 * ${{ mpi_prefix }}_*
+    - if: mpi != "nompi"
+      then:
+        - ${{ mpi }}
+        - parallelio 2.6.7
+  run:
+    - netcdf-fortran * ${{ mpi_prefix }}_*
+    - libnetcdf * ${{ mpi_prefix }}_*
+    - hdf5 * ${{ mpi_prefix }}_*
+    - if: mpi != "nompi"
+      then:
+        - ${{ mpi }}
+    - if: mpi == "openmpi"
+      then:
+        - openssh
+
+tests:
+  - script:
+      - ESMF_PrintInfo
+      - ESMF_RegridWeightGen --help
+      - if: unix
+        then:
+          - test -f ${ESMFMKFILE}
+      - if: win
+        then:
+          - if not exist %ESMFMKFILE% exit 1
+
+about:
+  homepage: http://earthsystemmodeling.org/
+  license: NCSA
+  license_file: LICENSE
+  summary: |
+    The Earth System Modeling Framework (ESMF) is software for building and
+    coupling weather, climate, and related models.
+  repository: https://github.com/esmf-org/esmf
+  documentation: https://earthsystemmodeling.org/doc/
+
+extra:
+  recipe-maintainers:
+    - billsacks
+    - zklaus
+    - ocefpaf
+    - rokuingh
+    - xylar
