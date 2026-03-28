@@ -27,7 +27,7 @@ libnetcdf:
 mpi:
 - openmpi
 mpich:
-- '4'
+- '5'
 netcdf_fortran:
 - '4.6'
 openmpi:
